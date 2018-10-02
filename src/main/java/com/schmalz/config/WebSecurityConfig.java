@@ -41,12 +41,6 @@ public class WebSecurityConfig {
     private String servicePassword;
 
 
-    @Value("#{'${ldap.list}'.split(',')}")
-    private List<String> ldapServerList;
-
-    @Value("#{'${ldap.access.role}'.split(';')}")
-    private List<String> roles;
-
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -58,34 +52,6 @@ public class WebSecurityConfig {
                         .authorities(SERVICE_USER_ROLE)
                     .and()
                     .configure(auth);
-
-
-            //String filterPattern = "(&(objectClass=user)(sAMAccountName={1})";
-            String filterPattern = "(&(objectClass=user)(sAMAccountName={1})";
-
-
-            if(roles.size() <= 0) {
-                log.warn("No AD-Groups specified for LDAP-authentication");
-            } else if(roles.size() == 1){
-                filterPattern += roles.get(0) + ")";
-            } else {
-                filterPattern += "(|";
-                for(String role : roles) {
-                    filterPattern += role;
-                }
-                filterPattern += "))";
-            }
-            for(String ldapServer : ldapServerList) {
-                String[] serverInfo = ldapServer.split("#");
-
-                ActiveDirectoryLdapAuthenticationProvider adProvider = new ActiveDirectoryLdapAuthenticationProvider(serverInfo[0], serverInfo[1]);
-                adProvider.setUseAuthenticationRequestCredentials(true);
-                adProvider.setConvertSubErrorCodesToExceptions(true);
-                adProvider.setSearchFilter(filterPattern);
-                adProvider.setUserDetailsContextMapper(new InetOrgPersonContextMapper());
-                auth.authenticationProvider(adProvider);
-            }
-
         }
     }
 
@@ -100,19 +66,8 @@ public class WebSecurityConfig {
         @Value("${security.disable}")
         private boolean securityDisabled;
 
-        @Value("#{'${ldap.access.role}'.split(';')}")
-        private List<String> roles;
 
         protected void configure(HttpSecurity http) throws Exception {
-
-            List<String> cleanRoles = new ArrayList<>();
-            for(String role : roles) {
-                String[] roleParts = role.split(",");
-                cleanRoles.add(roleParts[0].replace("(memberOf=CN=", ""));
-            }
-            roles = cleanRoles;
-
-            roles.add(WebSecurityConfig.SERVICE_USER_ROLE);
             if (!securityDisabled) {
                 http.antMatcher("/**").csrf().disable()
                         .formLogin().loginPage("/login").permitAll()
@@ -121,7 +76,6 @@ public class WebSecurityConfig {
                         .and()
                         .authorizeRequests()
                         .antMatchers("/css/**", "/webjars/**", "/img/**").permitAll()
-                        .antMatchers("/**").hasAnyAuthority(roles.toArray(new String[roles.size()]))
                         .and().httpBasic();
 
             }else{

@@ -8,34 +8,4 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-
-    <springProfile name="su,pu">
-        <springProperty scope="context" name="stage" source="spring.profiles.active"/>
-        <springProperty scope="context" name="appName" source="spring.application.name"/>
-        <appender name="gelf" class="de.appelgriepsch.logback.GelfAppender">
-            <server>weblog.schmalzgroup.net</server>
-            <port>12202</port>
-            <protocol>UDP</protocol>
-            <includeSource>true</includeSource>
-            <includeMDC>true</includeMDC>
-            <queueSize>512</queueSize>
-            <connectTimeout>1000</connectTimeout>
-            <reconnectDelay>500</reconnectDelay>
-            <additionalFields>env=${stage},app=esb,service=${appName}</additionalFields>
-        </appender>
-        <root level="INFO">
-            <appender-ref ref="gelf"/>
-        </root>
-    </springProfile>
-    <springProfile name="eu">
-        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-            <encoder>
-                <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n
-                </pattern>
-            </encoder>
-        </appender>
-        <logger name="org.springframework.security.ldap" additivity="false" level="debug">
-            <appender-ref ref="STDOUT"/>
-        </logger>
-    </springProfile>
 </configuration>
