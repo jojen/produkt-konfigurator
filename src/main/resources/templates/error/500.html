@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Schmalz ESB Service Server Error</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" th:href="@{~/css/main.css}"/>
+</head>
+<body class="login-page">
+
+<div th:replace="layout :: nav"></div>
+
+
+<!--
+${timestamp}
+${path} => Pfad indem der Fehler angefallen ist
+${error} => namentliches Alias
+${status} => Http-Code
+${message} => Fehlermeldung
+${exception}
+${trace} => stacktrace
+
+-->
+<div class="container margin-top-20">
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="alert alert-danger" style="margin-top: 136px">
+                    <div th:text="|Error occured: ${timestamp}|"></div>
+
+                    <h3>Sorry for the inconvenience</h3><br/>
+                    We'll be back right away
+                </div>
+            </div>
+
+            <div class="col-md-3"></div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

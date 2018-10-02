@@ -1,0 +1,178 @@
+/*****************************
+Custom
+******************************/
+
+/*****************************
+Layout
+******************************/
+
+.content {
+    min-height: 400px;
+}
+
+.login-page {
+    background-image: url("../img/bg.jpg");
+    background-size: cover;
+}
+
+.navbar {
+    background: white;
+    border-bottom: 1px solid #ebecec;
+}
+
+.logo {
+    padding: 5px;
+    height: 35px;
+    margin-top: 8px;
+
+}
+
+.login-container {
+    background: white;
+    padding: 30px;
+}
+
+/*****************************
+Buttons
+*****************************/
+.btn-default {
+    background: #ffffff;
+}
+
+.btn-default:hover {
+    background: #ffffff;
+    opacity: 0.9 !important;
+}
+
+.btn-primary {
+    background: #00549c;
+}
+
+.btn {
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: #00549c;
+    opacity: .9 !important;
+}
+
+.btn-success {
+    background: #a0be32;
+}
+
+.btn-success:hover {
+    background: #a0be32;
+    opacity: .9 !important;
+}
+
+.btn-danger {
+    background: #ff6600;
+}
+
+.btn-danger:hover {
+    background: #ff6600;
+    opacity: .9 !important;
+}
+
+.btn-info {
+    background: #96c3e6;
+}
+
+.btn-info:hover {
+    background: #96c3e6;
+    opacity: .9 !important;
+}
+
+/*****************************
+Labels
+*****************************/
+
+.label-primary {
+    background: #0050a0;
+}
+
+.label-success {
+    background: #a0be32;
+}
+
+.label-danger {
+    background: #ff6600;
+}
+
+.label-info {
+    background: #96c3e6;
+}
+
+/*****************************
+Listgroup
+*****************************/
+
+.list-group-item-success {
+    background: #a0be32;
+}
+
+.list-group-item-info {
+    background: #96c3e6;
+}
+
+.list-group-item-danger {
+    background: #ff6600;
+}
+
+/*****************************
+Bootstrap Panels
+*****************************/
+
+.panel-primary {
+    background: #0050a0;
+}
+
+.panel-success {
+    background: #a0be32;
+}
+
+.panel-info {
+    background: #96c3e6;
+}
+
+.panel-danger {
+    background: #ff6600;
+}
+
+/*****************************
+Basics
+******************************/
+
+body {
+    font-family: 'Istok Web', sans-serif !important;
+}
+
+* {
+    border-radius: 0 !important;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}
+
+input {
+    box-shadow: none !important;
+}
+
+a{
+    color: #00549c;
+}
+
+nav a{
+    color: #00549c !important;
+}
+
+nav a:hover{
+    color: #00549c;
+    opacity: 0.9;
+}

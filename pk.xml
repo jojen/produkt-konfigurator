@@ -1,0 +1,9 @@
+<service>
+    <id>print-service</id>
+    <name>Schmalz blueprint</name>
+    <description>This service runs Schmalz blueprint.</description>
+
+    <executable>java</executable>
+    <arguments>-Xrs -Xmx256m -jar "%BASE%\print.jar"</arguments>
+    <logmode>rotate</logmode>
+</service>

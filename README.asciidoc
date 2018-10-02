@@ -1,0 +1,11 @@
+# Produkt Konfigurator
+:toc:
+
+## Build and Run
+The project uses three *maven profiles* to create stage-specific artifacts, and three *spring profiles* to control the runtime configuration.
+
+
+
+
+
+

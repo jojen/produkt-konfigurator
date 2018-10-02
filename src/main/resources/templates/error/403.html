@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Schmalz ESB Service Access Denied</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" th:href="@{~/css/main.css}"/>
+</head>
+<body class="login-page">
+
+<div th:replace="layout :: nav"></div>
+
+<div class="container margin-top-20">
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-danger">
+                    <div th:text="|Error occured: ${timestamp}|"></div>
+                    <h3>Sorry you don't have access to this service.</h3><br/>
+                    Please contact your administrator
+                </div>
+                <form th:action="@{/logout}" method="post">
+                    <input style="margin-top: 8px;" type="submit" class="btn" value="Logout"/>
+                </form>
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

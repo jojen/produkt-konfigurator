@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Schmalz ESB Service Access Denied</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" th:href="@{~/css/main.css}"/>
+</head>
+<body class="login-page">
+
+<div th:replace="layout :: nav"></div>
+
+
+<!--
+${timestamp}
+${path} => Pfad indem der Fehler angefallen ist
+${error} => namentliches Alias
+${status} => Http-Code
+${message} => Fehlermeldung
+${exception}
+${trace} => stacktrace
+
+-->
+<div class="container margin-top-20">
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="alert alert-danger" style="margin-top: 210px">
+                    <div th:text="|Error occured: ${timestamp}|"></div>
+                    <div th:case="403">
+                        <h3>Sorry you don't have access to this service.</h3><br/>
+                        Please contact your administrator
+                        <form th:action="@{/logout}" method="post">
+                            <input style="margin-top: 8px;" type="submit" class="btn" value="Logout"/>
+                        </form>
+
+                    </div>
+
+                    <div th:case="404">
+                        <h3>Sorry, this page does not exist.</h3><br/>
+                        Please do refrain from tinkering with the URI<br/>
+                        You can go back <a th:href="@{/}">here</a>
+                        Error.html wins
+                    </div>
+
+                    <div th:case="500">
+                        <h3>Sorry for the inconvinience</h3><br/>
+                        We'll be back right away
+                    </div>
+
+                    <div th:case="*">
+                        <h3 th:text="${error}"></h3><br/>
+                        <span th:if="${message} != 'No message available'" th:text="${message}"></span>
+                        <span th:text="|Please contact your administrators and tell them about this statuscode: ${status}|"></span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3"></div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

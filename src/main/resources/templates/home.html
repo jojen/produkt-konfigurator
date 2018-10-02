@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout :: head"></head>
+<body>
+
+<div th:replace="layout :: header"></div>
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Produkte</h1>
+    <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example.
+        It's built with default Bootstrap components and utilities with little customization.</p>
+</div>
+
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+
+        <div th:each="product:${products}" class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal" th:text="${product.title}"></h4>
+            </div>
+            <div class="card-body">
+                <div th:text="${product.description}"></div>
+                <button type="button" class="btn btn-lg btn-block btn-primary">Konfigurieren</button>
+            </div>
+        </div>
+
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal editable-field">Neues Produkt</h4>
+            </div>
+            <div class="card-body">
+                <div>&nbsp;</div>
+                <a th:href="@{/admin/product/edit/}" type="button"
+                   class="btn btn-lg btn-block btn-success">hinzufügen</a>
+            </div>
+        </div>
+    </div>
+    <div th:replace="layout :: footer"></div>
+</div>
+
+</body>
+</html>
