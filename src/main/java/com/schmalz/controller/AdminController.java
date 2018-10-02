@@ -3,6 +3,7 @@ package com.schmalz.controller;
 import com.schmalz.model.Product;
 import com.schmalz.repo.ProductRepository;
 import com.schmalz.service.HomePageService;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +33,19 @@ public class AdminController {
         return "admin/dashboard";
     }
 
-    @RequestMapping(value = "/{page}", method = RequestMethod.GET)
-    public String page(Model model, @PathVariable("page") String page) {
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    public String page(Model model) {
         model.addAttribute("homePage", homePageService.getHomePage());
-        return "admin/" + page;
+        model.addAttribute("products", productRepository.findAll());
+        return "admin/products";
     }
 
 
     @RequestMapping(value = "/product/edit", method = RequestMethod.GET)
     public String edit(Model model,
-                       @RequestParam(value = "id", required = false) String id) {
+                       @RequestParam(value = "id", required = false) ObjectId id) {
         if (id != null) {
-            model.addAttribute(productRepository.findById(id));
+            model.addAttribute("self",productRepository.findById(id).get());
         } else {
             model.addAttribute("self", new Product());
         }
@@ -51,10 +53,15 @@ public class AdminController {
         return "admin/product.edit";
     }
 
+    @RequestMapping(value = "/product/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam(value = "id") ObjectId id) {
+            productRepository.deleteById(id);
+        return "redirect:/admin/products";
+    }
+
     @RequestMapping(value = "/product/update", method = RequestMethod.POST)
     public String update(Model model, @ModelAttribute("self") @Validated Product p) {
         productRepository.save(p);
-        model.addAttribute("homePage", homePageService.getHomePage());
-        return "redirect:/";
+        return "redirect:/admin/products";
     }
 }

@@ -1,34 +1,43 @@
+
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="layout :: head"></head>
-<body>
+<head th:replace="admin/adminlayout :: head"></head>
+
+<body id="page-top">
+<nav th:replace="admin/adminlayout :: header"></nav>
+<div id="wrapper">
+    <div th:replace="admin/adminlayout :: sidebar"></div>
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <ol th:replace="admin/adminlayout :: breadcrumb('products','Products')"></ol>
 
 
-<div th:replace="layout :: header"></div>
+            <form class="form-horizontal" method="post" th:object="${self}" action="#" th:action="@{/admin/product/update/}">
 
-<form class="form-horizontal" method="post" th:object="${self}" action="#" th:action="@{/admin/product/update/}">
-
-    <div class="container">
-        <div class="card-deck mb-3 text-center">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <input th:field="*{title}" type="text" class="form-control" id="title" placeholder="Titel"/>
+                <div class="container">
+                    <div class="card-deck mb-3 text-center">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <input th:field="*{title}" type="text" class="form-control" id="title" placeholder="Titel"/>
+                            </div>
+                            <input th:field="*{id}" type="hidden" class="form-control" id="id" />
+                            <div class="card-body">
+                                    <textarea th:field="*{description}" id="description"></textarea>
+                                <input type="submit" class="btn btn-lg btn-block btn-outline-primary" value="Speichern"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title">
-                        <input th:field="*{description}" type="text" class="form-control" id="description"
-                               placeholder="Beschreibung"/>
-                    </h1>
+            </form>
 
-                    <input type="submit" class="btn btn-lg btn-block btn-outline-primary" value="Speichern"/>
-                </div>
-            </div>
+
         </div>
-        <div th:replace="layout :: footer"></div>
     </div>
-</form>
-
+    <footer th:replace="admin/adminlayout :: footer"></footer>
+</div>
+<a th:replace="admin/adminlayout :: scrolltotop"></a>
+<div th:replace="admin/adminlayout :: js"></div>
 
 </body>
 </html>

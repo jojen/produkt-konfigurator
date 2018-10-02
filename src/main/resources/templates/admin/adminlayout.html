@@ -56,7 +56,7 @@
                 <span>Dashboard</span>
             </a>
         <li class="nav-item">
-            <a class="nav-link" href="products">
+            <a class="nav-link" href="/admin/products">
                 <i class="fas fa-fw fa-object-group"></i>
                 <span>Products</span></a>
         </li>
@@ -70,7 +70,7 @@
             <a href="/admin/">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">
-            <a th:if="${link}" th:text="${page}" th:href="${link}"></a>
+            <a th:if="${link}" th:text="${page}" th:href="@{'/admin/'+${link}}"></a>
             <span th:unless="${link}" th:text="${page}"></span>
         </li>
     </ol>
@@ -263,10 +263,11 @@
 <div th:fragment="js">
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <script type="text/javascript" th:src="@{../webjars/jquery/3.3.1/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{../webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{../webjars/jquery-easing/1.3/jquery.easing.min.js}"></script>
-
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery-easing/1.3/jquery.easing.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/tinymce/4.7.9/jquery.tinymce.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/tinymce/4.7.9/tinymce.min.js}"></script>
     <script th:src="@{/js/admin/sb-admin.min.js}"></script>
     <script th:src="@{/js/admin/admin.js}"></script>
 </div>

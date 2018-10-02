@@ -119,6 +119,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>tinymce</artifactId>
+            <version>4.7.9</version>
+        </dependency>
+
+        <dependency>
             <groupId>de.appelgriepsch.logback</groupId>
             <artifactId>logback-gelf-appender</artifactId>
             <version>1.3</version>
