@@ -9,8 +9,10 @@
     <div th:replace="admin/adminlayout :: sidebar"></div>
     <div id="content-wrapper">
         <div class="container-fluid">
-            <ol th:replace="admin/adminlayout :: breadcrumb(null,'Overview')"></ol>
-            <div th:replace="admin/adminlayout :: examplecontent"></div>
+            <ol th:replace="admin/adminlayout :: breadcrumb('products','Products')"></ol>
+            <div>
+                TEST
+            </div>
         </div>
     </div>
     <footer th:replace="admin/adminlayout :: footer"></footer>

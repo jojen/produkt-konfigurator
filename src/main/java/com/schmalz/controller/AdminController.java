@@ -32,6 +32,12 @@ public class AdminController {
         return "admin/dashboard";
     }
 
+    @RequestMapping(value = "/{page}", method = RequestMethod.GET)
+    public String page(Model model, @PathVariable("page") String page) {
+        model.addAttribute("homePage", homePageService.getHomePage());
+        return "admin/" + page;
+    }
+
 
     @RequestMapping(value = "/product/edit", method = RequestMethod.GET)
     public String edit(Model model,

@@ -1,15 +1,10 @@
 package com.schmalz.model;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-
-
 import java.util.List;
 
 

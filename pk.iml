@@ -85,7 +85,10 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:bootstrap:4.1.3" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:popper.js:1.14.3" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars:jquery:3.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:jquery:3.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:jquery-easing:1.3-2" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:datatables:1.10.19" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:font-awesome:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: de.appelgriepsch.logback:logback-gelf-appender:1.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
