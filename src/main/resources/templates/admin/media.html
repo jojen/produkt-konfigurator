@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="admin/adminlayout :: head"></head>
+
+<body id="page-top">
+<nav th:replace="admin/adminlayout :: header"></nav>
+<div id="wrapper">
+    <div th:replace="admin/adminlayout :: sidebar"></div>
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <ol th:replace="admin/adminlayout :: breadcrumb('products','Media')"></ol>
+            <div>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-object-group"></i>
+                        Media
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="media-gallery">
+                                <img th:each="image:${images}" th:src="@{'/media/' + ${image.id} + '/' + ${image.filename}}">
+                            </div>
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form enctype="multipart/form-data"
+                                              th:action="@{/admin/media/update}" method="POST"
+                                              class="dropzone" id="fileUploadForm">
+
+                                            <span id="fileUploadStatus"> </span>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="admin/adminlayout :: footer"></footer>
+</div>
+<a th:replace="admin/adminlayout :: scrolltotop"></a>
+<div th:replace="admin/adminlayout :: js"></div>
+
+</body>
+</html>

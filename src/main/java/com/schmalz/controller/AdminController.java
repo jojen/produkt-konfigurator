@@ -32,36 +32,4 @@ public class AdminController {
         model.addAttribute("homePage", homePageService.getHomePage());
         return "admin/dashboard";
     }
-
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String page(Model model) {
-        model.addAttribute("homePage", homePageService.getHomePage());
-        model.addAttribute("products", productRepository.findAll());
-        return "admin/products";
-    }
-
-
-    @RequestMapping(value = "/product/edit", method = RequestMethod.GET)
-    public String edit(Model model,
-                       @RequestParam(value = "id", required = false) ObjectId id) {
-        if (id != null) {
-            model.addAttribute("self",productRepository.findById(id).get());
-        } else {
-            model.addAttribute("self", new Product());
-        }
-        model.addAttribute("homePage", homePageService.getHomePage());
-        return "admin/product.edit";
-    }
-
-    @RequestMapping(value = "/product/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "id") ObjectId id) {
-            productRepository.deleteById(id);
-        return "redirect:/admin/products";
-    }
-
-    @RequestMapping(value = "/product/update", method = RequestMethod.POST)
-    public String update(Model model, @ModelAttribute("self") @Validated Product p) {
-        productRepository.save(p);
-        return "redirect:/admin/products";
-    }
 }

@@ -11,27 +11,20 @@
     <div id="content-wrapper">
         <div class="container-fluid">
             <ol th:replace="admin/adminlayout :: breadcrumb('products','Products')"></ol>
-
-
             <form class="form-horizontal" method="post" th:object="${self}" action="#" th:action="@{/admin/product/update/}">
-
-                <div class="container">
-                    <div class="card-deck mb-3 text-center">
-                        <div class="card mb-4 box-shadow">
-                            <div class="card-header">
-                                <input th:field="*{title}" type="text" class="form-control" id="title" placeholder="Titel"/>
-                            </div>
-                            <input th:field="*{id}" type="hidden" class="form-control" id="id" />
-                            <div class="card-body">
-                                    <textarea th:field="*{description}" id="description"></textarea>
-                                <input type="submit" class="btn btn-lg btn-block btn-outline-primary" value="Speichern"/>
-                            </div>
-                        </div>
+                <form>
+                    <input th:field="*{id}" type="hidden" class="form-control" id="id" />
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" th:field="*{title}" class="form-control" id="title"  >
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" th:field="*{description}" id="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
             </form>
-
-
         </div>
     </div>
     <footer th:replace="admin/adminlayout :: footer"></footer>

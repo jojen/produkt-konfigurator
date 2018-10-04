@@ -21,13 +21,26 @@ public class Product {
     @Id
     private ObjectId id;
     private String title;
+    private String titleUrlFriendly;
+    private String description;
+
     @DBRef
     private List<Image> image;
-    private String description;
-    private List<ProductOption> options;
-    private List<Attribute> attributes;
+
     @DBRef
-    private List<ProductOption> excluded;
+    private List<Attribute> step1;
+
+    @DBRef
+    private List<Attribute> step2;
+
+    @DBRef
+    private List<Attribute> step3;
+
+    @DBRef
+    private List<Attribute> step4;
+
+    @DBRef
+    private List<Attribute> step5;
 
     private Double price;
 }

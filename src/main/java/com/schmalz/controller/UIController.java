@@ -2,6 +2,8 @@ package com.schmalz.controller;
 
 import com.schmalz.repo.ProductRepository;
 import com.schmalz.service.HomePageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 public class UIController {
-
-    public static final String MESSAGE = "Hello World UI!";
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     HomePageService homePageService;
@@ -28,6 +29,13 @@ public class UIController {
         model.addAttribute("homePage", homePageService.getHomePage());
         model.addAttribute("products", productRepository.findAll());
         return "home";
+    }
+
+    @RequestMapping(value = "/{product}")
+    public String podukt(Model model, @PathVariable("product") String product) {
+        model.addAttribute("homePage", homePageService.getHomePage());
+        model.addAttribute("self", productRepository.findByTitleUrlFriendly(product).get());
+        return "product";
     }
 
 

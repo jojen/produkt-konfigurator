@@ -373,3 +373,11 @@ body.sidebar-toggled footer.sticky-footer {
         width: calc(100% - 90px);
     }
 }
+
+.dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 15px;
+    background: white;
+    padding: 30px;
+    margin-top: 10px;
+}

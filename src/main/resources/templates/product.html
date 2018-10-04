@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout :: head"></head>
+<body>
+
+<div th:replace="layout :: header"></div>
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+    <h1 class="display-4" th:text="${self.title}"></h1>
+    <p class="lead" th:utext="${self.description}"></p>
+</div>
+
+<div class="container">
+
+</div>
+
+</body>
+</html>

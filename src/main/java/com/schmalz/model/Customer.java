@@ -21,6 +21,4 @@ public class Customer {
 
     @DBRef
     private Product currentProduct;
-    @DBRef
-    private List<ProductOption> currentProductOptions;
 }

@@ -2,6 +2,8 @@ package com.schmalz.service;
 
 import com.schmalz.model.HomePage;
 import com.schmalz.repo.HomePageRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Service
 public class HomePageService {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     HomePageRepository homePageRepository;
 

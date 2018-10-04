@@ -18,5 +18,5 @@ public class Attribute {
     private String title;
     private String type;
     private List<String> values;
-    private List<ProductOption> excluded;
+    private Double price;
 }
