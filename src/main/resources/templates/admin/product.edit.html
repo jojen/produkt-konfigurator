@@ -13,7 +13,7 @@
             <ol th:replace="admin/adminlayout :: breadcrumb('products','Products')"></ol>
             <form class="form-horizontal" method="post" th:object="${self}" action="#" th:action="@{/admin/product/update/}">
                 <form>
-                    <input th:field="*{id}" type="hidden" class="form-control" id="id" />
+                    <input th:if="${self.id != null}" th:field="*{id}" type="hidden" class="form-control" id="id" />
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input type="text" th:field="*{title}" class="form-control" id="title"  >

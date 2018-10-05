@@ -16,12 +16,26 @@
                         <i class="fas fa-object-group"></i>
                         Media
                     </div>
+
+
                     <div class="card-body">
                         <div class="table-responsive">
-                            <div class="media-gallery">
-                                <img th:each="image:${images}" th:src="@{'/media/' + ${image.id} + '/' + ${image.filename}}">
+                            <div id="links">
+                                <a th:each="image:${images}" th:src="@{'/media/' + ${image.id} +'/'+ ${image.filename}}" data-gallery>
+                                    <img th:src="@{'/media/thumb/' + ${image.id} + '/300/200/'+ ${image.filename}}">
+                                </a>
                             </div>
 
+                            <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+                            <div id="blueimp-gallery" class="blueimp-gallery" data-start-slideshow="true" data-filter=":even">
+                                <div class="slides"></div>
+                                <h3 class="title"></h3>
+                                <a class="prev">‹</a>
+                                <a class="next">›</a>
+                                <a class="close">×</a>
+                                <a class="play-pause"></a>
+                                <ol class="indicator"></ol>
+                            </div>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -35,6 +49,9 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
