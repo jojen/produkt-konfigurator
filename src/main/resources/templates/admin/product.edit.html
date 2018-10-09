@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
@@ -11,23 +10,66 @@
     <div id="content-wrapper">
         <div class="container-fluid">
             <ol th:replace="admin/adminlayout :: breadcrumb('products','Products')"></ol>
-            <form class="form-horizontal" method="post" th:object="${self}" action="#" th:action="@{/admin/product/update/}">
+            <form class="form-horizontal" method="post" th:object="${self}" action="#"
+                  th:action="@{/admin/product/update/}">
                 <form>
-                    <input th:if="${self.id != null}" th:field="*{id}" type="hidden" class="form-control" id="id" />
+                    <input th:if="${self.id != null}" th:field="*{id}" type="hidden" class="form-control" id="id"/>
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" th:field="*{title}" class="form-control" id="title"  >
+                        <input type="text" th:field="*{title}" class="form-control" id="title">
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" th:field="*{description}" id="description"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <div class="form-group">
+                        <label for="description">Image</label>
+                        <input type="hidden" th:field="*{image}" class="form-control" id="image">
+
+                        <img th:if="*{image != null}" th:src="@{*{image.linkS}}" class="img-fluid" id="image-view">
+                        <img th:unless="*{image != null}" class="img-fluid" id="image-view" style="display:none">
+
+                        <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                data-target="#select-gallery" data-modalviewtarget="image-view"
+                                data-modaltarget="image">
+                            Select image
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-default btn-lg" onclick="window.history.back()">Back</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary btn-lg fa-pull-right">Save</button>
+                        </div>
+                    </div>
                 </form>
             </form>
         </div>
     </div>
-    <footer th:replace="admin/adminlayout :: footer"></footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="select-gallery" tabindex="-1" role="dialog" aria-labelledby="Select Media"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Select Media</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img th:each="image:${home.imageGallery}" th:src="@{${image.linkS}}" class="select-gallery-item"
+                         th:data-id="${image.id}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer th:replace="admin/adminlayout :: footer"></footer>
 </div>
 <a th:replace="admin/adminlayout :: scrolltotop"></a>
 <div th:replace="admin/adminlayout :: js"></div>

@@ -22,7 +22,9 @@
             </div>
             <div class="card-body">
                 <div th:utext="${product.description}"></div>
-                <a th:text="${product.title}+' anpassen'" class="btn btn-lg btn-block btn-primary" th:href="@{'/' + ${product.titleUrlFriendly}}"></a>
+                <img th:if="${product.image}" th:src="${product.image.linkM}">
+                <a th:text="${product.title}+' anpassen'" class="btn btn-lg btn-block btn-primary"
+                   th:href="@{'/' + ${product.titleUrlFriendly}}"></a>
             </div>
         </div>
     </div>

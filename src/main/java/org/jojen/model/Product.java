@@ -23,7 +23,7 @@ public class Product {
     private String description;
 
     @DBRef
-    private List<Image> image;
+    private Image image;
 
     @DBRef
     private List<Attribute> step1;

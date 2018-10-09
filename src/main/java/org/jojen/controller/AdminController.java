@@ -26,7 +26,7 @@ public class AdminController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
-        model.addAttribute("homePage", homePageService.getHomePage());
+        model.addAttribute("home", homePageService.getAdminHomepage());
         return "admin/dashboard";
     }
 }

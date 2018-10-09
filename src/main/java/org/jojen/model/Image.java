@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.http.MediaType;
 
@@ -17,6 +18,7 @@ public class Image {
     @Id
     private String id;
     private String filename;
+    private String extention;
     private String mimetype;
 
     public MediaType getMediaType() {
@@ -25,4 +27,19 @@ public class Image {
         }
         return null;
     }
+
+    public String getLink() {
+        return "/media/" + id + "/" + filename + "." + extention;
+    }
+
+    public String getLinkS() {
+        return "/media/thumb/" + id + "/s/" + filename + ".png";
+    }
+    public String getLinkM() {
+        return "/media/thumb/" + id + "/m/" + filename + ".png";
+    }
+    public String getLinkL() {
+        return "/media/thumb/" + id + "/l/" + filename + ".png";
+    }
+
 }

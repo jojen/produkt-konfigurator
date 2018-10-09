@@ -3,6 +3,7 @@ package org.jojen.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,8 +18,13 @@ public class HomePage {
     private String headline;
     private String subHeadline;
 
+    @Transient
+    private List<Image> imageGallery;
+
     @DBRef
     private Image logo;
+
     @DBRef
     private List<Product> products;
+
 }

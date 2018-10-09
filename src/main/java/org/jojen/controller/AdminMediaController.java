@@ -1,5 +1,6 @@
 package org.jojen.controller;
 
+import org.jojen.model.Image;
 import org.jojen.repo.ImageRepository;
 import org.jojen.service.HomePageService;
 import org.jojen.service.ImageService;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Optional;
 
 
 @Controller
@@ -32,15 +34,18 @@ public class AdminMediaController {
 
     @RequestMapping(value = "/media", method = RequestMethod.GET)
     public String page(Model model) {
-        model.addAttribute("homePage", homePageService.getHomePage());
+        model.addAttribute("home", homePageService.getAdminHomepage());
         model.addAttribute("images", imageRepository.findAll());
         return "admin/media";
     }
 
     @RequestMapping(value = "/media/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "id") String id) {
-        imageRepository.deleteById(id);
-        return "redirect:/admin/products";
+    public String delete(@RequestParam(value = "id") String id) throws IOException {
+        Optional<Image> image = imageRepository.findById(id);
+        if (image.isPresent()) {
+            imageService.delete(image.get());
+        }
+        return "redirect:/admin/media";
     }
 
     @RequestMapping(value = "/media/update", method = RequestMethod.POST)

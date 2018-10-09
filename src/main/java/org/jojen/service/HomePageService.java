@@ -2,6 +2,7 @@ package org.jojen.service;
 
 import org.jojen.model.HomePage;
 import org.jojen.repo.HomePageRepository;
+import org.jojen.repo.ImageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,12 @@ import java.util.List;
 @Service
 public class HomePageService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     HomePageRepository homePageRepository;
+
+    @Autowired
+    ImageRepository imageRepository;
 
     public HomePage getHomePage() {
         List<HomePage> list = homePageRepository.findAll();
@@ -23,6 +28,15 @@ public class HomePageService {
         // wir legen lazy die erste an
         HomePage homePage = new HomePage();
         homePageRepository.save(homePage);
+
         return homePage;
+    }
+
+    public HomePage getAdminHomepage(){
+        HomePage ret = getHomePage();
+        ret.setImageGallery(imageRepository.findAll());
+
+        return ret;
+
     }
 }

@@ -2,6 +2,7 @@ package org.jojen.controller;
 
 import com.github.slugify.Slugify;
 import org.jojen.model.Product;
+import org.jojen.repo.ImageRepository;
 import org.jojen.repo.ProductRepository;
 import org.jojen.service.HomePageService;
 import org.bson.types.ObjectId;
@@ -26,9 +27,12 @@ public class AdminProductController {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    ImageRepository imageRepository;
+
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String page(Model model) {
-        model.addAttribute("homePage", homePageService.getHomePage());
+        model.addAttribute("home", homePageService.getAdminHomepage());
         model.addAttribute("products", productRepository.findAll());
         return "admin/products";
     }
@@ -42,7 +46,7 @@ public class AdminProductController {
         } else {
             model.addAttribute("self", new Product());
         }
-        model.addAttribute("homePage", homePageService.getHomePage());
+        model.addAttribute("home", homePageService.getAdminHomepage());
         return "admin/product.edit";
     }
 
@@ -55,6 +59,7 @@ public class AdminProductController {
     @RequestMapping(value = "/product/update", method = RequestMethod.POST)
     public String update(@ModelAttribute("self") @Validated Product p) {
         p.setTitleUrlFriendly(new Slugify().slugify(p.getTitle()));
+
         productRepository.save(p);
         return "redirect:/admin/products";
     }

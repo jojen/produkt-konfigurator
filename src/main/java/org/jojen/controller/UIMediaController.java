@@ -13,12 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
-
 
 
 /**
@@ -57,19 +57,13 @@ public class UIMediaController {
         return ResponseEntity.notFound().build();
     }
 
-    @RequestMapping(value = "/thumb/{id}/{width}/{height}/{filename}")
+    @RequestMapping(value = "/thumb/{id}/{size}/{filename}")
     public ResponseEntity thumb(@PathVariable(value = "id") String id,
-                                @PathVariable(value = "width") Integer width,
-                                @PathVariable(value = "height") Integer height) throws IOException {
+                                @PathVariable(value = "size") String size) throws IOException {
         Optional<Image> image = imageRepository.findById(id);
 
         if (image.isPresent()) {
-
-            File f = new File(imageService.getMediaThumbnailPath(image.get(), width,height));
-            if (!f.exists()) {
-                f = imageService.createThumbnail(image.get(), width, height);
-            }
-
+            File f = imageService.getThumbnail(image.get(), size);
             HttpHeaders headers = new HttpHeaders();
             headers.add("Cache-Control", "max-age=31536000");
 

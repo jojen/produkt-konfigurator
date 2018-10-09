@@ -3,9 +3,11 @@ package org.jojen.service;
 import com.github.slugify.Slugify;
 import com.mortennobel.imagescaling.DimensionConstrain;
 import com.mortennobel.imagescaling.ResampleOp;
+import org.apache.commons.lang3.StringUtils;
 import org.jojen.model.Image;
 import org.jojen.repo.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,15 +21,24 @@ import java.nio.file.Paths;
 @Service
 public class ImageService {
 
+    @Value("${image.thumbnail.s}")
+    Integer sizeS;
+
+    @Value("${image.thumbnail.m}")
+    Integer sizeM;
+
+    @Value("${image.thumbnail.l}")
+    Integer sizeL;
+
     @Autowired
     ImageRepository imageRepository;
 
-    public String getMediaPath(Image i){
-        return getMediaDir()+File.separator+i.getId();
+    public String getMediaPath(Image i) {
+        return getMediaDir() + File.separator + i.getId();
     }
 
-    public String getMediaThumbnailPath(Image i, Integer width, Integer height){
-        return getMediaThumbsDir()+File.separator+width+"x"+height+"-"+i.getId();
+    public String getMediaThumbnailPath(Image i, String size) {
+        return getMediaThumbsDir() + File.separator + i.getId() + "-" + size;
     }
 
     private String getMediaDir() {
@@ -52,7 +63,13 @@ public class ImageService {
 
     public void saveImage(MultipartFile file) throws IOException {
         Image image = new Image();
-        image.setFilename(new Slugify().slugify(file.getOriginalFilename()));
+        String filename = file.getOriginalFilename();
+        if (filename != null && filename.contains(".")) {
+            String extention = filename.split("\\.")[filename.split("\\.").length-1];
+            image.setExtention(extention);
+            filename = filename.replaceAll("", "." + extention);
+        }
+        image.setFilename(new Slugify().slugify(filename));
         image.setMimetype(file.getContentType());
         imageRepository.save(image);
 
@@ -62,15 +79,36 @@ public class ImageService {
         Files.write(path, bytes);
     }
 
-    public File createThumbnail(Image i , Integer width, Integer height) throws IOException {
-        // TODO only valid sizes should be available
-        BufferedImage image = ImageIO.read(new FileInputStream((getMediaPath(i))));
-        ResampleOp rop = new ResampleOp(DimensionConstrain.createMaxDimension(width, -1));
-        rop.setNumberOfThreads(4);
-        BufferedImage b = rop.filter(image, null);
-        String thumbnailPath = getMediaThumbnailPath(i,width,height);
-        FileOutputStream fos = new FileOutputStream(thumbnailPath);
-        ImageIO.write(b, "png", fos);
-        return new File(thumbnailPath);
+    public File getThumbnail(Image i, String size) throws IOException {
+        File f = new File(getMediaThumbnailPath(i, size));
+        if (!f.exists()) {
+            BufferedImage image = ImageIO.read(new FileInputStream((getMediaPath(i))));
+            ResampleOp rop = new ResampleOp(DimensionConstrain.createMaxDimension(9999, resolveSize(size)));
+            rop.setNumberOfThreads(4);
+            BufferedImage b = rop.filter(image, null);
+            String thumbnailPath = getMediaThumbnailPath(i, size);
+            FileOutputStream fos = new FileOutputStream(thumbnailPath);
+            ImageIO.write(b, "png", fos);
+        }
+        return f;
+    }
+
+    private Integer resolveSize(String size) {
+        switch (size) {
+            case "m":
+                return sizeM;
+            case "l":
+                return sizeL;
+            default:
+                return sizeS;
+        }
+    }
+
+    public void delete(Image image) throws IOException {
+        getThumbnail(image, "s").delete();
+        getThumbnail(image, "m").delete();
+        getThumbnail(image, "l").delete();
+        new File(getMediaPath(image)).delete();
+        imageRepository.delete(image);
     }
 }

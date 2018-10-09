@@ -17,47 +17,49 @@
                         Media
                     </div>
 
-
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <div id="links">
-                                <a th:each="image:${images}" th:src="@{'/media/' + ${image.id} +'/'+ ${image.filename}}" data-gallery>
-                                    <img th:src="@{'/media/thumb/' + ${image.id} + '/300/200/'+ ${image.filename}}">
-                                </a>
-                            </div>
+                        <div class="row">
 
-                            <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
-                            <div id="blueimp-gallery" class="blueimp-gallery" data-start-slideshow="true" data-filter=":even">
-                                <div class="slides"></div>
-                                <h3 class="title"></h3>
-                                <a class="prev">‹</a>
-                                <a class="next">›</a>
-                                <a class="close">×</a>
-                                <a class="play-pause"></a>
-                                <ol class="indicator"></ol>
-                            </div>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <form enctype="multipart/form-data"
-                                              th:action="@{/admin/media/update}" method="POST"
-                                              class="dropzone" id="fileUploadForm">
+                            <div th:each="image:${images}" class="panel panel-default">
+                                <div class="panel-body">
+                                    <a th:href="@{${image.link}}"
+                                       data-toggle="lightbox">
+                                        <img th:src="@{${image.linkS}}" class="img-fluid">
+                                    </a>
+                                </div>
+                                <div class="panel-footer fa-pull-right">
 
-                                            <span id="fileUploadStatus"> </span>
+                                         <a th:href="@{/admin/media/delete(id=${image.id})}"
+                                            onclick="return confirm('Do you really want to delete this?')"
+                                            class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
 
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
-
-
-
                         </div>
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form enctype="multipart/form-data"
+                                          th:action="@{/admin/media/update}" method="POST"
+                                          class="dropzone" id="default-dropzone">
+                                        <span id="fileUploadStatus"> </span>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
+
                 </div>
+
+
             </div>
         </div>
     </div>
+</div>
 </div>
 <footer th:replace="admin/adminlayout :: footer"></footer>
 </div>
