@@ -44,6 +44,3 @@ $(document).on("click", ".select-gallery-item", function () {
     $("#"+modaltarget).attr('value',id);
     $modal.modal('toggle');
 });
-
-
-

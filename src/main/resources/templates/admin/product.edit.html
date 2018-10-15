@@ -36,6 +36,79 @@
                         </button>
                     </div>
                     <div class="row">
+                        <script type="text/javascript" th:src="@{/webjars/json-editor/0.7.21/jsoneditor.js}"></script>
+
+
+                        <div class="col-md-10">
+                            <div id='attributes'></div>
+                            <input type="hidden" th:field="*{attributeJson}" id="attributeJson">
+                            <span id='valid_indicator'></span>
+                        </div>
+
+                        /admin/product/attribute/schema.js
+                        <script>
+                            // This is the starting value for the editor
+                            // We will use this to seed the initial editor
+                            // and to provide a "Restore to Default" button.
+                            var starting_value = document.getElementById('attributeJson').value;
+
+
+                            // Initialize the editor
+                            var editor = new JSONEditor(document.getElementById('attributes'), {
+                                // Enable fetching schemas via ajax
+                                ajax: true,
+                                disable_collapse: true,
+                                disable_edit_json: true,
+                                disable_properties: true,
+
+                                // The schema for the editor
+                                schema: {
+                                    $ref: "/rest/product/attribute/schema.json?id=[[${self.id}]]"
+                                },
+
+                                // Seed the form with a starting value
+                                startval: starting_value,
+
+                                // Disable additional properties
+                                no_additional_properties: true,
+
+                                // Require all properties by default
+                                required_by_default: true,
+
+                                theme: 'bootstrap3',
+
+                                iconlib: 'fontawesome4',
+
+                                template: 'handlebars',
+
+                            });
+
+                            // Hook up the validation indicator to update its
+                            // status whenever the editor changes
+                            editor.on('change', function () {
+                                // Get an array of errors from the validator
+                                var errors = editor.validate();
+                                var indicator = document.getElementById('valid_indicator');
+
+                                // Not valid
+                                if (errors.length) {
+                                    indicator.style.color = 'red';
+                                    indicator.textContent = "Nicht gülig";
+                                }
+                                // Valid
+                                else {
+
+                                        document.getElementById('attributeJson').value = JSON.stringify(editor.getValue());
+
+
+                                    indicator.style.color = 'green';
+                                    indicator.textContent = "Gültig";
+                                }
+                            });
+                        </script>
+
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <button class="btn btn-default btn-lg" onclick="window.history.back()">Back</button>
                         </div>

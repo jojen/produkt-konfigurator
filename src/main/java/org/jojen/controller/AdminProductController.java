@@ -1,5 +1,7 @@
 package org.jojen.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.slugify.Slugify;
 import org.jojen.model.Product;
 import org.jojen.repo.ImageRepository;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import springfox.documentation.spring.web.json.Json;
 
 @Controller
 @RequestMapping("/admin")
@@ -49,6 +52,7 @@ public class AdminProductController {
         model.addAttribute("home", homePageService.getAdminHomepage());
         return "admin/product.edit";
     }
+
 
     @RequestMapping(value = "/product/delete", method = RequestMethod.GET)
     public String delete(@RequestParam(value = "id") String id) {

@@ -1,13 +1,21 @@
 package org.jojen.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.github.reinert.jjschema.JsonSchemaGenerator;
+import com.github.reinert.jjschema.SchemaGeneratorBuilder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -25,20 +33,40 @@ public class Product {
     @DBRef
     private Image image;
 
-    @DBRef
-    private List<Attribute> step1;
+    private List<Attribute> attributes;
 
-    @DBRef
-    private List<Attribute> step2;
+    private Double width;
 
-    @DBRef
-    private List<Attribute> step3;
+    private Double height;
 
-    @DBRef
-    private List<Attribute> step4;
-
-    @DBRef
-    private List<Attribute> step5;
+    private Double length;
 
     private Double price;
+
+    private Double pricelevel;
+
+    public String getAttributeJson() throws JsonProcessingException {
+        if (getAttributes() != null && !getAttributes().isEmpty()) {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(getAttributes());
+        }
+        return null;
+    }
+
+    public void setAttributeJson(String json) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        TypeReference<List<Attribute>> typeRef
+                = new TypeReference<List<Attribute>>() {
+        };
+        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        setAttributes(mapper.readValue(json, typeRef));
+    }
+
+    public JsonNode getAttributeSchema() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        JsonSchemaGenerator v4generator = SchemaGeneratorBuilder.draftV4HyperSchema().build();
+        return v4generator.generateSchema(Attribute.class);
+
+    }
 }
