@@ -16,7 +16,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.IOException;
-import java.util.List;
 
 
 @Document
@@ -33,7 +32,7 @@ public class Product {
     @DBRef
     private Image image;
 
-    private List<Attribute> attributes;
+    private AttributeList attributes;
 
     private Double width;
 
@@ -46,7 +45,7 @@ public class Product {
     private Double pricelevel;
 
     public String getAttributeJson() throws JsonProcessingException {
-        if (getAttributes() != null && !getAttributes().isEmpty()) {
+        if (getAttributes() != null && !getAttributes().getAttributes().isEmpty()) {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(getAttributes());
         }
@@ -55,10 +54,9 @@ public class Product {
 
     public void setAttributeJson(String json) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        TypeReference<List<Attribute>> typeRef
-                = new TypeReference<List<Attribute>>() {
+        TypeReference<AttributeList> typeRef
+                = new TypeReference<AttributeList>() {
         };
-        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         setAttributes(mapper.readValue(json, typeRef));
     }
 
@@ -66,7 +64,6 @@ public class Product {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         JsonSchemaGenerator v4generator = SchemaGeneratorBuilder.draftV4HyperSchema().build();
-        return v4generator.generateSchema(Attribute.class);
-
+        return v4generator.generateSchema(AttributeList.class);
     }
 }

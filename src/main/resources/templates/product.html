@@ -7,14 +7,24 @@
 <div th:replace="layout :: header"></div>
 
 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto">
     <h1 class="display-4" th:text="${self.title}"></h1>
     <p class="lead" th:utext="${self.description}"></p>
 </div>
 
 <div class="container">
+    <div th:each="attribute :${self.attributes.attributes}" class="panel panel-default">
+        <div th:text="${attribute.title}" class="panel-heading"></div>
+        <div class="panel-body">
+            <ul>
+                <li th:each="value:${attribute.values}" th:text="${value}"></li>
+            </ul>
+        </div>
+    </div>
 
 </div>
+
+<div th:replace="layout :: footer"></div>
 
 </body>
 </html>
