@@ -23,8 +23,7 @@ public class AdminRestController {
     ProductRepository productRepository;
 
     @RequestMapping(value = "/product/attribute/schema.json", method = RequestMethod.GET)
-    public JsonNode attributeSchema(Model model, @RequestParam(value = "id") String id)  {
-        Product p = productRepository.findById(id).get();
-        return p.getAttributeSchema();
+    public JsonNode attributeSchema()  {
+        return Product.getAttributeSchema();
     }
 }

@@ -60,7 +60,7 @@ public class Product {
         setAttributes(mapper.readValue(json, typeRef));
     }
 
-    public JsonNode getAttributeSchema() {
+    public static JsonNode getAttributeSchema() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         JsonSchemaGenerator v4generator = SchemaGeneratorBuilder.draftV4HyperSchema().build();
