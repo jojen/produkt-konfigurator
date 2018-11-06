@@ -45,10 +45,12 @@
                         </div>
 
                         <script>
+
+
                             // This is the starting value for the editor
                             // We will use this to seed the initial editor
                             // and to provide a "Restore to Default" button.
-                            var starting_value = '[(${self.attributeJson})]';
+                            var starting_value = [(${self.attributeJson})];
 
                             // Initialize the editor
                             var editor = new JSONEditor(document.getElementById('attributes'), {
@@ -59,7 +61,8 @@
                                 disable_properties: true,
                                 // The schema for the editor
                                 schema: {
-                                    $ref: "/rest/product/attribute/schema.json"
+                                    $ref: "/rest/product/attribute/schema.json",
+                                    format: "grid"
                                 },
                                 // Seed the form with a starting value
                                 startval: starting_value,
@@ -67,9 +70,9 @@
                                 no_additional_properties: true,
                                 // Require all properties by default
                                 required_by_default: true,
-                                theme: 'bootstrap3',
+                                theme: 'bootstrap2',
                                 iconlib: 'fontawesome4',
-                                template: 'handlebars'
+
 
                             });
 

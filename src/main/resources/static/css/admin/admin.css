@@ -381,5 +381,41 @@ body.sidebar-toggled footer.sticky-footer {
     padding: 30px;
     margin-top: 10px;
 }
+.well h3 {
+    font-size: 1rem;
+}
+.well .container-fluid {
+    padding-left: 30px;
+}
+.span12 .well {
+    padding-left: 30px;
+}
+.well .control-group{
+    width: 300px !important;
+}
+
+.well .control-group .controls{
+    width: 300px;
+}
+
+.well .control-group {
+ display: inline-block;
+}
+
+.well .btn-group {
+    width: 300px;
+    display: inline-block;
+}
+
+
+.well .control-group input {
+    width: 300px !important
+
+}
+
+.well .control-group + div {
+  display: none;
+}
+
 
 

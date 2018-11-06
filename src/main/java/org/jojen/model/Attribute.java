@@ -10,11 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Attributes(title = "Attribute", description = "Attribute for product")
+@Attributes(title = "Attribut")
 public class Attribute {
     @Attributes(required = true, title = "Titel")
     private String title;
-    @Attributes(required = true, title = "Typ")
+    @Attributes(required = true, title = "Typ", enums = {"Zahl", "Text"})
     private String type;
     @Attributes(required = true, title = "Werte")
     private List<String> values;

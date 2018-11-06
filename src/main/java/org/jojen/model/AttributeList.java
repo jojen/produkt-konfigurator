@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Attributes(title = "AttributeList", description = "AttributeList for product")
+@Attributes(title = " ")
 public class AttributeList {
-    @Attributes(required = true, title = "Attributes")
+    @Attributes(required = true, title = "Attribute")
     private List<Attribute> attributes;
 }
