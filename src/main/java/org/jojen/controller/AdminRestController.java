@@ -22,8 +22,4 @@ public class AdminRestController {
     @Autowired
     ProductRepository productRepository;
 
-    @RequestMapping(value = "/product/attribute/schema.json", method = RequestMethod.GET)
-    public JsonNode attributeSchema()  {
-        return Product.getAttributeSchema();
-    }
 }

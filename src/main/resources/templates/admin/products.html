@@ -11,40 +11,48 @@
         <div class="container-fluid">
             <ol th:replace="admin/adminlayout :: breadcrumb('products','Products')"></ol>
             <div>
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <i class="fas fa-object-group"></i>
-                        Products
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="product:${products}">
-                                    <td><a th:text="${product.title}" th:href="@{/admin/product/edit/(id=${product.id})}"></a></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a th:href="@{/admin/product/delete/(id=${product.id})}"><i class="fas fa-trash"></i></a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-<div> <a class="btn btn-success text-white" th:href="@{/admin/product/edit/}">Produkt hinzufügen</a></div>
 
+
+                <a class="btn btn-success text-white btn-lg" th:href="@{/admin/product/edit/}">Produkt hinzufügen
+                    <i class="fa fa-plus"></i></a>
+                <div>&nbsp;</div>
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Titel</th>
+
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product:${products}">
+                            <td><a th:href="@{/admin/product/edit/(id=${product.id})}">
+                                <span th:text="${product.title}"></span>
+                                <i class="far fa-edit"></i>
+                            </a></td>
+
+                            <td><a th:href="@{/admin/product/delete/(id=${product.id})}">
+                                <button class="btn btn-danger"
+                                        onclick="return confirm('Sind Sie sicher?')">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
+
         </div>
     </div>
-    <footer th:replace="admin/adminlayout :: footer"></footer>
+</div>
+</div>
+<footer th:replace="admin/adminlayout :: footer"></footer>
 </div>
 <a th:replace="admin/adminlayout :: scrolltotop"></a>
 <div th:replace="admin/adminlayout :: js"></div>

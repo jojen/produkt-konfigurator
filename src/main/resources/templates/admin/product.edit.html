@@ -12,101 +12,378 @@
             <ol th:replace="admin/adminlayout :: breadcrumb('products','Products')"></ol>
             <form class="form-horizontal" method="post" th:object="${self}" action="#"
                   th:action="@{/admin/product/update/}">
-                <form>
+
                     <input th:if="${self.id != null}" th:field="*{id}" type="hidden" class="form-control" id="id"/>
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" th:field="*{title}" class="form-control" id="title">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" th:field="*{description}" id="description"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Image</label>
-                        <input type="hidden" th:field="*{image}" class="form-control" id="image">
 
-                        <img th:if="*{image != null}" th:src="@{*{image.linkS}}" class="img-fluid" id="image-view">
-                        <img th:unless="*{image != null}" class="img-fluid" id="image-view" style="display:none">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-basis-tab" data-toggle="tab" href="#nav-basis"
+                               role="tab" aria-controls="nav-basis" aria-selected="true">Basis</a>
+                            <a class="nav-item nav-link" id="nav-price-tab" data-toggle="tab" href="#nav-price"
+                               role="tab" aria-controls="nav-price" aria-selected="false">Preise</a>
+                            <a class="nav-item nav-link" id="nav-size-tab" data-toggle="tab" href="#nav-size"
+                               role="tab" aria-controls="nav-size" aria-selected="false">Größen</a>
+                            <a class="nav-item nav-link" id="nav-property-tab" data-toggle="tab" href="#nav-property"
+                               role="tab" aria-controls="nav-property" aria-selected="false">Eigenschaften</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-basis" role="tabpanel"
+                             aria-labelledby="nav-home-tab">
 
-                        <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
-                                data-target="#select-gallery" data-modalviewtarget="image-view"
-                                data-modaltarget="image">
-                            Select image
-                        </button>
-                    </div>
-                    <div class="row">
-                        <script type="text/javascript" th:src="@{/webjars/json-editor/0.7.21/jsoneditor.js}"></script>
 
-                        <div class="col-md-10">
-                            <div id='attributes'></div>
-                            <input type="hidden" th:field="*{attributeJson}" id="attributeJson">
-                            <span id='valid_indicator'></span>
+                            <div class="form-group">
+                                <label for="title">Titel</label>
+                                <input type="text" th:field="*{title}" class="form-control" id="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Beschreibung</label>
+                                <textarea class="form-control" th:field="*{description}" id="description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Bild</label><br>
+                                <input type="hidden" th:field="*{image}" class="form-control" id="image">
+
+                                <img th:if="*{image != null}" th:src="@{*{image.linkS}}" class="img-fluid"
+                                     id="image-view">
+                                <img th:unless="*{image != null}" class="img-fluid" id="image-view"
+                                     style="display:none">
+
+                                <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                        data-target="#select-gallery" data-modalviewtarget="image-view"
+                                        data-modaltarget="image">
+                                    Bild wählen
+                                </button>
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane fade" id="nav-price" role="tabpanel" aria-labelledby="nav-price-tab">
+                            <div class="form-group">
+                                <label for="title">Fixe Kosten</label>
+                                <input type="text" th:field="*{fixcosts}" class="form-control" id="title">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="title">Holzpreis pro m³ Produkt</label>
+                                <input type="text" th:field="*{woodbaseprice}" class="form-control" id="woodbaseprice">
+                            </div>
                         </div>
 
-                        <script>
+                        <div class="tab-pane fade" id="nav-size" role="tabpanel" aria-labelledby="nav-size-tab">
+                            <h4>Länge</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" th:field="*{length.allowCustomSize}" id="length.allowCustomSize">
+                                <label for="title">Erlaube Sonderlänge</label>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XS</label>
+                                        <input type="number" step="0.01" th:field="*{length.xs}" class="form-control" id="length.xs">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XS Beschreibung</label>
+                                        <input type="text" th:field="*{length.xsDescription}" class="form-control" id="length.xsDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">S</label>
+                                        <input type="number" step="0.01" th:field="*{length.s}" class="form-control" id="length.s">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">S Beschreibung</label>
+                                        <input type="text" th:field="*{length.sDescription}" class="form-control" id="length.sDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">M</label>
+                                        <input type="number" step="0.01" th:field="*{length.m}" class="form-control" id="length.m">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">M Beschreibung</label>
+                                        <input type="text" th:field="*{length.mDescription}" class="form-control" id="length.mDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">L</label>
+                                        <input type="number" step="0.01" th:field="*{length.l}" class="form-control" id="length.l">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">L Beschreibung</label>
+                                        <input type="text" th:field="*{length.lDescription}" class="form-control" id="length.lDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XL</label>
+                                        <input type="number" step="0.01" th:field="*{length.xl}" class="form-control" id="length.xl">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XL Beschreibung</label>
+                                        <input type="text" th:field="*{length.xlDescription}" class="form-control" id="length.xlDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XXL</label>
+                                        <input type="number" step="0.01" th:field="*{length.xxl}" class="form-control" id="length.xxl">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XXL Beschreibung</label>
+                                        <input type="text" th:field="*{length.xxlDescription}" class="form-control" id="length.xxlDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4>Breite</h4>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" th:field="*{width.allowCustomSize}" id="width.allowCustomSize">
+                                <label for="title">Erlaube Sonderbreite</label>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XS</label>
+                                        <input type="number" step="0.01" th:field="*{width.xs}" class="form-control" id="width.xs">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XS Beschreibung</label>
+                                        <input type="text" th:field="*{width.xsDescription}" class="form-control" id="width.xsDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">S</label>
+                                        <input type="number" step="0.01" th:field="*{width.s}" class="form-control" id="width.s">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">S Beschreibung</label>
+                                        <input type="text" th:field="*{width.sDescription}" class="form-control" id="width.sDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">M</label>
+                                        <input type="number" step="0.01" th:field="*{width.m}" class="form-control" id="width.m">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">M Beschreibung</label>
+                                        <input type="text" th:field="*{width.mDescription}" class="form-control" id="width.mDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">L</label>
+                                        <input type="number" step="0.01" th:field="*{width.l}" class="form-control" id="width.l">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">L Beschreibung</label>
+                                        <input type="text" th:field="*{width.lDescription}" class="form-control" id="width.lDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XL</label>
+                                        <input type="number" step="0.01" th:field="*{width.xl}" class="form-control" id="width.xl">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XL Beschreibung</label>
+                                        <input type="text" th:field="*{width.xlDescription}" class="form-control" id="width.xlDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XXL</label>
+                                        <input type="number" step="0.01" th:field="*{width.xxl}" class="form-control" id="width.xxl">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XXL Beschreibung</label>
+                                        <input type="text" th:field="*{width.xxlDescription}" class="form-control" id="width.xxlDescription">
+                                    </div>
+                                </div>
+                            </div>
 
 
-                            // This is the starting value for the editor
-                            // We will use this to seed the initial editor
-                            // and to provide a "Restore to Default" button.
-                            var starting_value = [(${self.attributeJson})];
+                            <h4>Höhe</h4>
 
-                            // Initialize the editor
-                            var editor = new JSONEditor(document.getElementById('attributes'), {
-                                // Enable fetching schemas via ajax
-                                ajax: true,
-                                disable_collapse: true,
-                                disable_edit_json: true,
-                                disable_properties: true,
-                                // The schema for the editor
-                                schema: {
-                                    $ref: "/rest/product/attribute/schema.json",
-                                    format: "grid"
-                                },
-                                // Seed the form with a starting value
-                                startval: starting_value,
-                                // Disable additional properties
-                                no_additional_properties: true,
-                                // Require all properties by default
-                                required_by_default: true,
-                                theme: 'bootstrap2',
-                                iconlib: 'fontawesome4',
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" th:field="*{height.allowCustomSize}" id="height.allowCustomSize">
+                                <label for="title">Erlaube Sonderhöhe</label>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XS</label>
+                                        <input type="number" step="0.01" th:field="*{height.xs}" class="form-control" id="height.xs">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XS Beschreibung</label>
+                                        <input type="text" th:field="*{height.xsDescription}" class="form-control" id="height.xsDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">S</label>
+                                        <input type="number" step="0.01" th:field="*{height.s}" class="form-control" id="height.s">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">S Beschreibung</label>
+                                        <input type="text" th:field="*{height.sDescription}" class="form-control" id="height.sDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">M</label>
+                                        <input type="number" step="0.01" th:field="*{height.m}" class="form-control" id="height.m">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">M Beschreibung</label>
+                                        <input type="text" th:field="*{height.mDescription}" class="form-control" id="height.mDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">L</label>
+                                        <input type="number" step="0.01" th:field="*{height.l}" class="form-control" id="height.l">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">L Beschreibung</label>
+                                        <input type="text" th:field="*{height.lDescription}" class="form-control" id="height.lDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XL</label>
+                                        <input type="number" step="0.01" th:field="*{height.xl}" class="form-control" id="height.xl">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XL Beschreibung</label>
+                                        <input type="text" step="0.01" th:field="*{height.xlDescription}" class="form-control" id="height.xlDescription">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XXL</label>
+                                        <input type="number" step="0.01" th:field="*{height.xxl}" class="form-control" id="height.xxl">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="title">XXL Beschreibung</label>
+                                        <input type="text" th:field="*{height.xxlDescription}" class="form-control" id="height.xxlDescription">
+                                    </div>
+                                </div>
+                            </div>
 
 
-                            });
 
-                            // Hook up the validation indicator to update its
-                            // status whenever the editor changes
-                            editor.on('change', function () {
-                                // Get an array of errors from the validator
-                                var errors = editor.validate();
-                                var indicator = document.getElementById('valid_indicator');
-
-                                // Not valid
-                                if (errors.length) {
-                                    indicator.style.color = 'red';
-                                    indicator.textContent = "Nicht gülig";
-                                }
-                                // Valid
-                                else {
-                                    document.getElementById('attributeJson').value = JSON.stringify(editor.getValue());
-                                    indicator.style.color = 'green';
-                                    indicator.textContent = "Gültig";
-                                }
-                            });
-                        </script>
-
+                        </div>
+                        <div class="tab-pane fade" id="nav-property" role="tabpanel" aria-labelledby="nav-property-tab">
+                        </div>
                     </div>
+
+                    <div>&nbsp;</div>
                     <div class="row">
                         <div class="col-md-6">
-                            <button class="btn btn-default btn-lg" onclick="window.history.back()">Back</button>
+                            <button class="btn btn-default btn-lg"   onclick="window.history.back()">Zurück</button>
                         </div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary btn-lg fa-pull-right">Save</button>
+                            <button type="submit" class="btn btn-primary btn-lg fa-pull-right">Speichern</button>
                         </div>
                     </div>
-                </form>
+                    <div>&nbsp;</div>
+
             </form>
         </div>
     </div>

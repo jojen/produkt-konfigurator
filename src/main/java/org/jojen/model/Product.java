@@ -1,13 +1,5 @@
 package org.jojen.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.github.reinert.jjschema.JsonSchemaGenerator;
-import com.github.reinert.jjschema.SchemaGeneratorBuilder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.IOException;
+import java.util.List;
 
 
 @Document
@@ -32,38 +24,42 @@ public class Product {
     @DBRef
     private Image image;
 
-    private AttributeList attributes;
+    private SizeAttribute width;
 
-    private Double width;
+    private SizeAttribute height;
 
-    private Double height;
+    private SizeAttribute length;
 
-    private Double length;
+    private List<Property> properties;
 
-    private Double price;
+    private List<Accessory> accessories;
 
-    private Double pricelevel;
+    private Double woodbaseprice;
 
-    public String getAttributeJson() throws JsonProcessingException {
-        if (getAttributes() != null && !getAttributes().getAttributes().isEmpty()) {
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(getAttributes());
+    private Double fixcosts;
+
+    public String getId() {
+        return id;
+    }
+
+    public SizeAttribute getWidth() {
+        if (width == null) {
+            width = new SizeAttribute();
         }
-        return null;
+        return width;
     }
 
-    public void setAttributeJson(String json) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        TypeReference<AttributeList> typeRef
-                = new TypeReference<AttributeList>() {
-        };
-        setAttributes(mapper.readValue(json, typeRef));
+    public SizeAttribute getHight() {
+        if (height == null) {
+            height = new SizeAttribute();
+        }
+        return height;
     }
 
-    public static JsonNode getAttributeSchema() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        JsonSchemaGenerator v4generator = SchemaGeneratorBuilder.draftV4HyperSchema().build();
-        return v4generator.generateSchema(AttributeList.class);
+    public SizeAttribute getLength() {
+        if (length == null) {
+            length = new SizeAttribute();
+        }
+        return length;
     }
 }
