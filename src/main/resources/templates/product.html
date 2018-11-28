@@ -36,7 +36,8 @@
 
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-size" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="well">
+            <div>&nbsp;</div>
+            <div class="card card-body bg-light">
                 <h4>Länge</h4>
                 <input id="length" type="text"
                        data-provide="slider"
@@ -47,7 +48,10 @@
                        data-slider-step="1"
                        data-th-data-slider-value="${self.length.sliderValue}"
                        data-slider-tooltip="hide"/>
+                <img id="length-image">
             </div>
+            <div>&nbsp;</div>
+            <div class="card card-body bg-light">
                 <h4>Breite</h4>
                 <input id="width" type="text"
                        data-provide="slider"
@@ -58,7 +62,9 @@
                        data-slider-step="1"
                        data-th-data-slider-value="${self.width.sliderValue}"
                        data-slider-tooltip="hide"/>
-
+            </div>
+            <div>&nbsp;</div>
+            <div class="card card-body bg-light">
                 <h4>Höhe</h4>
                 <input id="height" type="text"
                        data-provide="slider"
@@ -69,11 +75,18 @@
                        data-slider-step="1"
                        data-th-data-slider-value="${self.height.sliderValue}"
                        data-slider-tooltip="hide"/>
-
-
-
+            </div>
         </div>
+
+
         <div class="tab-pane fade" id="nav-property" role="tabpanel" aria-labelledby="nav-property-tab">
+
+            <select multiple="multiple" class="image-picker show-labels">
+                <option data-img-src="http://placekitten.com/220/200" value="1">Cute Kitten 1</option>
+                <option data-img-src="http://placekitten.com/180/200" value="2">Cute Kitten 2</option>
+                <option data-img-src="http://placekitten.com/130/200" value="3">Cute Kitten 3</option>
+                <option data-img-src="http://placekitten.com/270/200" value="4">Cute Kitten 4</option>
+            </select>
 
         </div>
     </div>

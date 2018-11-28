@@ -3,7 +3,8 @@ package org.jojen.service;
 import com.github.slugify.Slugify;
 import com.mortennobel.imagescaling.DimensionConstrain;
 import com.mortennobel.imagescaling.ResampleOp;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.io.FilenameUtils;
+
 import org.jojen.model.Image;
 import org.jojen.repo.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,13 +65,13 @@ public class ImageService {
     public void saveImage(MultipartFile file) throws IOException {
         Image image = new Image();
         String filename = file.getOriginalFilename();
-        if (filename != null && filename.contains(".")) {
-            String extention = filename.split("\\.")[filename.split("\\.").length-1];
-            image.setExtention(extention);
-            filename = filename.replaceAll("", "." + extention);
-        }
+        String extention = FilenameUtils.getExtension(file.getOriginalFilename());
+        image.setExtention(extention);
+        filename = filename.replace("." + extention, "");
         image.setFilename(new Slugify().slugify(filename));
         image.setMimetype(file.getContentType());
+
+
         imageRepository.save(image);
 
         byte[] bytes = file.getBytes();

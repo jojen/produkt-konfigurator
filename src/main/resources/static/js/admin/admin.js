@@ -25,8 +25,7 @@ $(document).on('click', '[data-toggle="lightbox"]', function (event) {
 });
 
 // Image Gallery Form Selector
-$(document).on("click", ".select-gallery-btn", function () {
-    console.log("huhu");
+$(document).on("click", ".select-gallery-btn", function () {   ;
     var modalviewtarget = $(this).data('modalviewtarget');
     var modaltarget = $(this).data('modaltarget');
 
@@ -43,4 +42,13 @@ $(document).on("click", ".select-gallery-item", function () {
     $("#"+modalviewtarget).attr('src',src).show();
     $("#"+modaltarget).attr('value',id);
     $modal.modal('toggle');
+});
+
+
+$(".delete-image").click(function () {
+    var image = $(this).data("target");
+    $("#"+image).val("");
+    var imageview = $(this).data("view-target");
+    $("#"+imageview).attr("src","");
+
 });

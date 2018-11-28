@@ -46,13 +46,14 @@
 
                                 <img th:if="*{image != null}" th:src="@{*{image.linkS}}" class="img-fluid"
                                      id="image-view">
-                                <img th:unless="*{image != null}" class="img-fluid" id="image-view"
-                                     style="display:none">
-
+                                <img th:unless="*{image != null}" class="img-fluid" id="image-view" style="display:none">
                                 <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
                                         data-target="#select-gallery" data-modalviewtarget="image-view"
                                         data-modaltarget="image">
                                     Bild wählen
+                                </button>
+                                <button th:if="*{image != null}" type="button" class="btn btn-danger delete-image" data-target="image" data-view-target="image-view">
+                                    Bild entfernen
                                 </button>
                             </div>
 
@@ -73,196 +74,470 @@
 
                         <div class="tab-pane fade" id="nav-size" role="tabpanel" aria-labelledby="nav-size-tab">
                             <h4>Länge</h4>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" th:field="*{length.allowCustomSize}" id="length.allowCustomSize">
-                                <label for="title">Erlaube Sonderlänge</label>
-
-                            </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XS</label>
                                         <input type="number" step="0.01" th:field="*{length.xs}" class="form-control" id="length.xs">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XS Beschreibung</label>
                                         <input type="text" th:field="*{length.xsDescription}" class="form-control" id="length.xsDescription">
                                     </div>
                                 </div>
+
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XS Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{length.xsImage}" class="form-control" id="length-xsImage">
+
+                                            <img th:if="*{length.xsImage != null}" th:src="@{*{length.xsImage.linkS}}" class="img-fluid"
+                                                 id="length-xsImage-view">
+                                            <img th:unless="*{length.xsImage != null}" class="img-fluid" id="length-xsImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="length-xsImage-view"
+                                                    data-modaltarget="length-xsImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{length.xsImage != null}" type="button" class="btn btn-danger delete-image" data-target="length-xsImage" data-view-target="length-xsImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">S</label>
                                         <input type="number" step="0.01" th:field="*{length.s}" class="form-control" id="length.s">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">S Beschreibung</label>
                                         <input type="text" th:field="*{length.sDescription}" class="form-control" id="length.sDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">S Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{length.sImage}" class="form-control" id="length-sImage">
+
+                                            <img th:if="*{length.sImage != null}" th:src="@{*{length.sImage.linkS}}" class="img-fluid"
+                                                 id="length-sImage-view">
+                                            <img th:unless="*{length.sImage != null}" class="img-fluid" id="length-sImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="length-sImage-view"
+                                                    data-modaltarget="length-sImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{length.sImage != null}" type="button" class="btn btn-danger delete-image" data-target="length-sImage" data-view-target="length-sImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">M</label>
                                         <input type="number" step="0.01" th:field="*{length.m}" class="form-control" id="length.m">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">M Beschreibung</label>
                                         <input type="text" th:field="*{length.mDescription}" class="form-control" id="length.mDescription">
                                     </div>
                                 </div>
+
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">M Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{length.mImage}" class="form-control" id="length-mImage">
+
+                                            <img th:if="*{length.mImage != null}" th:src="@{*{length.mImage.linkS}}" class="img-fluid"
+                                                 id="length-mImage-view">
+                                            <img th:unless="*{length.sImage != null}" class="img-fluid" id="length-mImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="length-mImage-view"
+                                                    data-modaltarget="length-mImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{length.mImage != null}" type="button" class="btn btn-danger delete-image" data-target="length-mImage" data-view-target="length-mImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">L</label>
                                         <input type="number" step="0.01" th:field="*{length.l}" class="form-control" id="length.l">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">L Beschreibung</label>
                                         <input type="text" th:field="*{length.lDescription}" class="form-control" id="length.lDescription">
                                     </div>
                                 </div>
+
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">L Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{length.lImage}" class="form-control" id="length-lImage">
+
+                                            <img th:if="*{length.lImage != null}" th:src="@{*{length.lImage.linkS}}" class="img-fluid"
+                                                 id="length-lImage-view">
+                                            <img th:unless="*{length.lImage != null}" class="img-fluid" id="length-lImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="length-lImage-view"
+                                                    data-modaltarget="length-lImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{length.lImage != null}" type="button" class="btn btn-danger delete-image" data-target="length-lImage" data-view-target="length-lImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XL</label>
                                         <input type="number" step="0.01" th:field="*{length.xl}" class="form-control" id="length.xl">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XL Beschreibung</label>
                                         <input type="text" th:field="*{length.xlDescription}" class="form-control" id="length.xlDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XL Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{length.xlImage}" class="form-control" id="length-xlImage">
+
+                                            <img th:if="*{length.xlImage != null}" th:src="@{*{length.xlImage.linkS}}" class="img-fluid"
+                                                 id="length-xlImage-view">
+                                            <img th:unless="*{length.xlImage != null}" class="img-fluid" id="length-xlImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="length-xlImage-view"
+                                                    data-modaltarget="length-xlImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{length.xlImage != null}" type="button" class="btn btn-danger delete-image" data-target="length-xlImage" data-view-target="length-xlImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XXL</label>
                                         <input type="number" step="0.01" th:field="*{length.xxl}" class="form-control" id="length.xxl">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XXL Beschreibung</label>
                                         <input type="text" th:field="*{length.xxlDescription}" class="form-control" id="length.xxlDescription">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XXL Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{length.xxlImage}" class="form-control" id="length-xxlImage">
+
+                                            <img th:if="*{length.xxlImage != null}" th:src="@{*{length.xxlImage.linkS}}" class="img-fluid"
+                                                 id="length-xxlImage-view">
+                                            <img th:unless="*{length.xxlImage != null}" class="img-fluid" id="length-xxlImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="length-xxlImage-view"
+                                                    data-modaltarget="length-xxlImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{length.xxlImage != null}" type="button" class="btn btn-danger delete-image" data-target="length-xxlImage" data-view-target="length-xxlImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <h4>Breite</h4>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" th:field="*{width.allowCustomSize}" id="width.allowCustomSize">
-                                <label for="title">Erlaube Sonderbreite</label>
-
-                            </div>
-
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XS</label>
                                         <input type="number" step="0.01" th:field="*{width.xs}" class="form-control" id="width.xs">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XS Beschreibung</label>
                                         <input type="text" th:field="*{width.xsDescription}" class="form-control" id="width.xsDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XS Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{width.xsImage}" class="form-control" id="width-xsImage">
+
+                                            <img th:if="*{width.xsImage != null}" th:src="@{*{width.xsImage.linkS}}" class="img-fluid"
+                                                 id="width-xsImage-view">
+                                            <img th:unless="*{width.xsImage != null}" class="img-fluid" id="width-xsImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="width-xsImage-view"
+                                                    data-modaltarget="width-xsImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{width.xsImage != null}" type="button" class="btn btn-danger delete-image" data-target="width-xsImage" data-view-target="width-xsImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">S</label>
                                         <input type="number" step="0.01" th:field="*{width.s}" class="form-control" id="width.s">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">S Beschreibung</label>
                                         <input type="text" th:field="*{width.sDescription}" class="form-control" id="width.sDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XS Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{width.sImage}" class="form-control" id="width-sImage">
+
+                                            <img th:if="*{width.sImage != null}" th:src="@{*{width.sImage.linkS}}" class="img-fluid"
+                                                 id="width-sImage-view">
+                                            <img th:unless="*{width.sImage != null}" class="img-fluid" id="width-sImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="width-sImage-view"
+                                                    data-modaltarget="width-sImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{width.sImage != null}" type="button" class="btn btn-danger delete-image" data-target="width-sImage" data-view-target="width-sImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">M</label>
                                         <input type="number" step="0.01" th:field="*{width.m}" class="form-control" id="width.m">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">M Beschreibung</label>
                                         <input type="text" th:field="*{width.mDescription}" class="form-control" id="width.mDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">M Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{width.mImage}" class="form-control" id="width-mImage">
+
+                                            <img th:if="*{width.mImage != null}" th:src="@{*{width.mImage.linkS}}" class="img-fluid"
+                                                 id="width-mImage-view">
+                                            <img th:unless="*{width.mImage != null}" class="img-fluid" id="width-mImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="width-mImage-view"
+                                                    data-modaltarget="width-mImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{width.mImage != null}" type="button" class="btn btn-danger delete-image" data-target="width-mImage" data-view-target="width-mImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">L</label>
                                         <input type="number" step="0.01" th:field="*{width.l}" class="form-control" id="width.l">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">L Beschreibung</label>
                                         <input type="text" th:field="*{width.lDescription}" class="form-control" id="width.lDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">L Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{width.lImage}" class="form-control" id="width-lImage">
+
+                                            <img th:if="*{width.lImage != null}" th:src="@{*{width.lImage.linkS}}" class="img-fluid"
+                                                 id="width-lImage-view">
+                                            <img th:unless="*{width.lImage != null}" class="img-fluid" id="width-lImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="width-lImage-view"
+                                                    data-modaltarget="width-lImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{width.lImage != null}" type="button" class="btn btn-danger delete-image" data-target="width-lImage" data-view-target="width-lImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XL</label>
                                         <input type="number" step="0.01" th:field="*{width.xl}" class="form-control" id="width.xl">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XL Beschreibung</label>
                                         <input type="text" th:field="*{width.xlDescription}" class="form-control" id="width.xlDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XL Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{width.xlImage}" class="form-control" id="width-xlImage">
+
+                                            <img th:if="*{width.xlImage != null}" th:src="@{*{width.xlImage.linkS}}" class="img-fluid"
+                                                 id="width-xlImage-view">
+                                            <img th:unless="*{width.xlImage != null}" class="img-fluid" id="width-xlImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="width-xlImage-view"
+                                                    data-modaltarget="width-xlImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{width.xlImage != null}" type="button" class="btn btn-danger delete-image" data-target="width-xlImage" data-view-target="width-xlImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XXL</label>
                                         <input type="number" step="0.01" th:field="*{width.xxl}" class="form-control" id="width.xxl">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XXL Beschreibung</label>
                                         <input type="text" th:field="*{width.xxlDescription}" class="form-control" id="width.xxlDescription">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XXL Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{width.xxlImage}" class="form-control" id="width-xxlImage">
+
+                                            <img th:if="*{width.xxlImage != null}" th:src="@{*{width.xxlImage.linkS}}" class="img-fluid"
+                                                 id="width-xxlImage-view">
+                                            <img th:unless="*{width.xxlImage != null}" class="img-fluid" id="width-xxlImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="width-xxlImage-view"
+                                                    data-modaltarget="width-xxlImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{width.xxlImage != null}" type="button" class="btn btn-danger delete-image" data-target="width-xxlImage" data-view-target="width-xxlImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -270,98 +545,230 @@
 
                             <h4>Höhe</h4>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" th:field="*{height.allowCustomSize}" id="height.allowCustomSize">
-                                <label for="title">Erlaube Sonderhöhe</label>
-
-                            </div>
-
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XS</label>
                                         <input type="number" step="0.01" th:field="*{height.xs}" class="form-control" id="height.xs">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XS Beschreibung</label>
                                         <input type="text" th:field="*{height.xsDescription}" class="form-control" id="height.xsDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XS Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{height.xsImage}" class="form-control" id="height-xsImage">
+
+                                            <img th:if="*{height.xsImage != null}" th:src="@{*{height.xsImage.linkS}}" class="img-fluid"
+                                                 id="height-xsImage-view">
+                                            <img th:unless="*{height.xsImage != null}" class="img-fluid" id="height-xsImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="height-xsImage-view"
+                                                    data-modaltarget="height-xsImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{height.xsImage != null}" type="button" class="btn btn-danger delete-image" data-target="height-xsImage" data-view-target="height-xsImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">S</label>
                                         <input type="number" step="0.01" th:field="*{height.s}" class="form-control" id="height.s">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">S Beschreibung</label>
                                         <input type="text" th:field="*{height.sDescription}" class="form-control" id="height.sDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">S Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{height.sImage}" class="form-control" id="height-sImage">
+
+                                            <img th:if="*{height.sImage != null}" th:src="@{*{height.sImage.linkS}}" class="img-fluid"
+                                                 id="height-sImage-view">
+                                            <img th:unless="*{height.sImage != null}" class="img-fluid" id="height-sImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="height-sImage-view"
+                                                    data-modaltarget="height-sImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{height.sImage != null}" type="button" class="btn btn-danger delete-image" data-target="height-sImage" data-view-target="height-sImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">M</label>
                                         <input type="number" step="0.01" th:field="*{height.m}" class="form-control" id="height.m">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">M Beschreibung</label>
                                         <input type="text" th:field="*{height.mDescription}" class="form-control" id="height.mDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">M Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{height.mImage}" class="form-control" id="height-mImage">
+
+                                            <img th:if="*{height.mImage != null}" th:src="@{*{height.mImage.linkS}}" class="img-fluid"
+                                                 id="height-mImage-view">
+                                            <img th:unless="*{height.mImage != null}" class="img-fluid" id="height-mImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="height-mImage-view"
+                                                    data-modaltarget="height-mImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{height.mImage != null}" type="button" class="btn btn-danger delete-image" data-target="height-mImage" data-view-target="height-mImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">L</label>
                                         <input type="number" step="0.01" th:field="*{height.l}" class="form-control" id="height.l">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">L Beschreibung</label>
                                         <input type="text" th:field="*{height.lDescription}" class="form-control" id="height.lDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">L Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{height.lImage}" class="form-control" id="height-lImage">
+
+                                            <img th:if="*{height.lImage != null}" th:src="@{*{height.lImage.linkS}}" class="img-fluid"
+                                                 id="height-lImage-view">
+                                            <img th:unless="*{height.lImage != null}" class="img-fluid" id="height-lImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="height-lImage-view"
+                                                    data-modaltarget="height-lImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{height.lImage != null}" type="button" class="btn btn-danger delete-image" data-target="height-lImage" data-view-target="height-lImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XL</label>
                                         <input type="number" step="0.01" th:field="*{height.xl}" class="form-control" id="height.xl">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XL Beschreibung</label>
                                         <input type="text" step="0.01" th:field="*{height.xlDescription}" class="form-control" id="height.xlDescription">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XL Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{height.xlImage}" class="form-control" id="height-xlImage">
+
+                                            <img th:if="*{height.xlImage != null}" th:src="@{*{height.xlImage.linkS}}" class="img-fluid"
+                                                 id="height-xlImage-view">
+                                            <img th:unless="*{height.xlImage != null}" class="img-fluid" id="height-xlImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="height-xlImage-view"
+                                                    data-modaltarget="height-xlImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{height.xlImage != null}" type="button" class="btn btn-danger delete-image" data-target="height-xlImage" data-view-target="height-xlImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1">
                                     <div class="form-group">
                                         <label for="title">XXL</label>
                                         <input type="number" step="0.01" th:field="*{height.xxl}" class="form-control" id="height.xxl">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="title">XXL Beschreibung</label>
                                         <input type="text" th:field="*{height.xxlDescription}" class="form-control" id="height.xxlDescription">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">XXL Bild</label>
+
+                                        <div class="form-group">
+                                            <input type="hidden" th:field="*{height.xxlImage}" class="form-control" id="height-xxlImage">
+
+                                            <img th:if="*{height.xxlImage != null}" th:src="@{*{height.xxlImage.linkS}}" class="img-fluid"
+                                                 id="height-xxlImage-view">
+                                            <img th:unless="*{height.xxlImage != null}" class="img-fluid" id="height-xxlImage-view"
+                                                 style="display:none">
+
+                                            <button type="button" class="btn btn-primary select-gallery-btn" data-toggle="modal"
+                                                    data-target="#select-gallery" data-modalviewtarget="height-xxlImage-view"
+                                                    data-modaltarget="height-xxlImage">
+                                                Bild wählen
+                                            </button>
+                                            <button th:if="*{height.xxlImage != null}" type="button" class="btn btn-danger delete-image" data-target="height-xxlImage" data-view-target="height-xxlImage-view">
+                                                Bild entfernen
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

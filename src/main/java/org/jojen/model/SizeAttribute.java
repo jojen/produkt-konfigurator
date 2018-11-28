@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -29,7 +30,19 @@ public class SizeAttribute {
     String xlDescription;
     String xxlDescription;
 
-    boolean allowCustomSize;
+    @DBRef
+    Image xsImage;
+    @DBRef
+    Image sImage;
+    @DBRef
+    Image mImage;
+    @DBRef
+    Image lImage;
+    @DBRef
+    Image xlImage;
+    @DBRef
+    Image xxlImage;
+
 
     public List<String> getTickLabels() {
         List<String> ret = new ArrayList<>();
@@ -56,7 +69,7 @@ public class SizeAttribute {
     }
 
     public String getTickLabelsAsString() throws JsonProcessingException {
-        return  new ObjectMapper().writeValueAsString(getTickLabels());
+        return new ObjectMapper().writeValueAsString(getTickLabels());
     }
 
     public List<Integer> getTicks() {
