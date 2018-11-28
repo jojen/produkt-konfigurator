@@ -10,8 +10,18 @@
 
 
     <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-        <h1 class="display-4" th:text="${self.title}"></h1>
-        <p class="lead" th:utext="${self.description}"></p>
+        <div class="row">
+            <div class="col-8">
+                <h1 class="display-4" th:text="${self.title}"></h1>
+                <p class="lead" th:utext="${self.description}"></p>
+            </div>
+            <div class="col-4">
+                <p>Ihr aktueller Preis</p>
+                <h1 class="display-4">1.445 €</h1>
+            </div>
+        </div>
+
+
     </div>
 
 
@@ -26,20 +36,40 @@
 
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-size" role="tabpanel" aria-labelledby="nav-home-tab">
-
-            <div class="form-group">
-                <label for="length">Länge</label>
-
+            <div class="well">
+                <h4>Länge</h4>
                 <input id="length" type="text"
                        data-provide="slider"
-                       data-slider-ticks="[1, 2, 3]"
-                       data-slider-ticks-labels='["short", "medium", "long"]'
+                       data-th-data-slider-ticks="${self.length.ticks}"
+                       data-th-data-slider-ticks-labels='${self.length.tickLabelsAsString}'
                        data-slider-min="1"
-                       data-slider-max="3"
+                       data-th-data-slider-max="${self.length.sliderMax}"
                        data-slider-step="1"
-                       data-slider-value="3"
+                       data-th-data-slider-value="${self.length.sliderValue}"
                        data-slider-tooltip="hide"/>
             </div>
+                <h4>Breite</h4>
+                <input id="width" type="text"
+                       data-provide="slider"
+                       data-th-data-slider-ticks="${self.width.ticks}"
+                       data-th-data-slider-ticks-labels='${self.width.tickLabelsAsString}'
+                       data-slider-min="1"
+                       data-th-data-slider-max="${self.width.sliderMax}"
+                       data-slider-step="1"
+                       data-th-data-slider-value="${self.width.sliderValue}"
+                       data-slider-tooltip="hide"/>
+
+                <h4>Höhe</h4>
+                <input id="height" type="text"
+                       data-provide="slider"
+                       data-th-data-slider-ticks="${self.height.ticks}"
+                       data-th-data-slider-ticks-labels='${self.height.tickLabelsAsString}'
+                       data-slider-min="1"
+                       data-th-data-slider-max="${self.height.sliderMax}"
+                       data-slider-step="1"
+                       data-th-data-slider-value="${self.height.sliderValue}"
+                       data-slider-tooltip="hide"/>
+
 
 
         </div>

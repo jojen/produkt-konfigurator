@@ -7,31 +7,45 @@
 <div th:replace="layout :: header"></div>
 
 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Produkte</h1>
-    <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example.
-        It's built with default Bootstrap components and utilities with little customization.</p>
-</div>
-
 <div class="container">
-    <div class="card-deck mb-3">
 
-        <div th:each="product:${products}" class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal" th:text="${product.title}"></h4>
+
+        <div id="productCarousel" class="carousel slide" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+                <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#productCarousel" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div th:each="product,i:${products}" class="carousel-item"
+                     th:classappend="${i.index == 0} ?  active : ''">
+
+                    <img width="100%" th:if="${product.image}" th:src="${product.image.linkM}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 th:text="${product.title}"></h5>
+                        <p th:utext="${product.description}"></p>
+                        <a th:text="${product.title}+' anpassen'" class="btn btn-lg btn-outline-primary"
+                           th:href="@{'/' + ${product.titleUrlFriendly}}"></a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div th:utext="${product.description}"></div>
-                <img th:if="${product.image}" th:src="${product.image.linkM}">
-                <a th:text="${product.title}+' anpassen'" class="btn btn-lg btn-block btn-primary"
-                   th:href="@{'/' + ${product.titleUrlFriendly}}"></a>
-            </div>
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
         </div>
-    </div>
+
 
 </div>
+
 
 <div th:replace="layout :: footer"></div>
+<div th:replace="layout :: footer-js"></div>
 
 </body>
 </html>
