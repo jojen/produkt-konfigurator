@@ -30,6 +30,8 @@ public class SizeAttribute {
     String xlDescription;
     String xxlDescription;
 
+    Double selectedValue;
+
     @DBRef
     Image xsImage;
     @DBRef
@@ -106,5 +108,36 @@ public class SizeAttribute {
             ret.add(i);
         }
         return i;
+    }
+
+    public List<Double> getSliderValues() {
+        List<Double> ret = new ArrayList<>();
+        if (xs != null) {
+            ret.add(xs);
+        }
+        if (s != null) {
+            ret.add(s);
+        }
+        if (m != null) {
+            ret.add(m);
+        }
+        if (l != null) {
+            ret.add(l);
+        }
+        if (xl != null) {
+            ret.add(xl);
+        }
+        if (xxl != null) {
+            ret.add(xxl);
+        }
+
+        return ret;
+    }
+
+    public Double getSelectedValue(){
+        if(selectedValue == null){
+            return m;
+        }
+        return selectedValue;
     }
 }

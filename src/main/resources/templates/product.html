@@ -8,88 +8,98 @@
 
 <div class="container">
 
+    <form id="productform" class="form-horizontal" method="post" th:object="${self}" action="#"
+          th:action="@{/api/validate/}">
 
-    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-        <div class="row">
-            <div class="col-8">
-                <h1 class="display-4" th:text="${self.title}"></h1>
-                <p class="lead" th:utext="${self.description}"></p>
+        <input th:field="*{id}" type="hidden"/>
+
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+            <div class="row">
+                <div class="col-8">
+                    <h1 class="display-4" th:text="${self.title}"></h1>
+                    <p class="lead" th:utext="${self.description}"></p>
+                </div>
+                <div class="col-4">
+                    <p>Ihr aktueller Preis</p>
+                    <h1 id="price" class="display-4"></h1>
+                </div>
             </div>
-            <div class="col-4">
-                <p>Ihr aktueller Preis</p>
-                <h1 class="display-4">1.445 €</h1>
-            </div>
+
+
         </div>
 
 
-    </div>
-
-
-    <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-size-tab" data-toggle="tab" href="#nav-size"
-               role="tab" aria-controls="nav-size" aria-selected="true">Größe</a>
-            <a class="nav-item nav-link" id="nav-property-tab" data-toggle="tab" href="#nav-property"
-               role="tab" aria-controls="nav-property" aria-selected="false">Eigenschaften</a>
-        </div>
-    </nav>
-
-    <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-size" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div>&nbsp;</div>
-            <div class="card card-body bg-light">
-                <h4>Länge</h4>
-                <input id="length" type="text"
-                       data-provide="slider"
-                       data-th-data-slider-ticks="${self.length.ticks}"
-                       data-th-data-slider-ticks-labels='${self.length.tickLabelsAsString}'
-                       data-slider-min="1"
-                       data-th-data-slider-max="${self.length.sliderMax}"
-                       data-slider-step="1"
-                       data-th-data-slider-value="${self.length.sliderValue}"
-                       data-slider-tooltip="hide"/>
-                <img id="length-image">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-size-tab" data-toggle="tab" href="#nav-size"
+                   role="tab" aria-controls="nav-size" aria-selected="true">Größe</a>
+                <a class="nav-item nav-link" id="nav-property-tab" data-toggle="tab" href="#nav-property"
+                   role="tab" aria-controls="nav-property" aria-selected="false">Eigenschaften</a>
             </div>
-            <div>&nbsp;</div>
-            <div class="card card-body bg-light">
-                <h4>Breite</h4>
-                <input id="width" type="text"
-                       data-provide="slider"
-                       data-th-data-slider-ticks="${self.width.ticks}"
-                       data-th-data-slider-ticks-labels='${self.width.tickLabelsAsString}'
-                       data-slider-min="1"
-                       data-th-data-slider-max="${self.width.sliderMax}"
-                       data-slider-step="1"
-                       data-th-data-slider-value="${self.width.sliderValue}"
-                       data-slider-tooltip="hide"/>
+        </nav>
+
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-size" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div>&nbsp;</div>
+                <div class="card card-body bg-light">
+                    <h4>Länge</h4>
+                    <input th:if="${self.length}" id="length" type="text"
+                           data-provide="slider"
+                           data-th-data-slider-ticks="${self.length.ticks}"
+                           data-th-data-slider-ticks-labels='${self.length.tickLabelsAsString}'
+                           data-slider-min="1"
+                           data-th-data-slider-max="${self.length.sliderMax}"
+                           data-slider-step="1"
+                           data-th-data-slider-value="${self.length.sliderValue}"
+                           data-th-data-slider-values="${self.length.sliderValues}"
+                           data-slider-tooltip="hide"/>
+                    <input id="length-selectedValue" type="hidden" th:field="*{length.selectedValue}">
+                    <img id="length-image">
+                </div>
+                <div>&nbsp;</div>
+                <div class="card card-body bg-light">
+                    <h4>Breite</h4>
+                    <input th:if="${self.width}" id="width" type="text"
+                           data-provide="slider"
+                           data-th-data-slider-ticks="${self.width.ticks}"
+                           data-th-data-slider-ticks-labels='${self.width.tickLabelsAsString}'
+                           data-slider-min="1"
+                           data-th-data-slider-max="${self.width.sliderMax}"
+                           data-slider-step="1"
+                           data-th-data-slider-value="${self.width.sliderValue}"
+                           data-th-data-slider-values="${self.width.sliderValues}"
+                           data-slider-tooltip="hide"/>
+                    <input id="width-selectedValue" type="hidden" th:field="*{width.selectedValue}">
+                </div>
+                <div>&nbsp;</div>
+                <div class="card card-body bg-light">
+                    <h4>Höhe</h4>
+                    <input th:if="${self.height}" id="height" type="text"
+                           data-provide="slider"
+                           data-th-data-slider-ticks="${self.height.ticks}"
+                           data-th-data-slider-ticks-labels='${self.height.tickLabelsAsString}'
+                           data-slider-min="1"
+                           data-th-data-slider-max="${self.height.sliderMax}"
+                           data-slider-step="1"
+                           data-th-data-slider-value="${self.height.sliderValue}"
+                           data-th-data-slider-values="${self.height.sliderValues}"
+                           data-slider-tooltip="hide"/>
+                    <input id="height-selectedValue" type="hidden" th:field="*{height.selectedValue}">
+                </div>
             </div>
-            <div>&nbsp;</div>
-            <div class="card card-body bg-light">
-                <h4>Höhe</h4>
-                <input id="height" type="text"
-                       data-provide="slider"
-                       data-th-data-slider-ticks="${self.height.ticks}"
-                       data-th-data-slider-ticks-labels='${self.height.tickLabelsAsString}'
-                       data-slider-min="1"
-                       data-th-data-slider-max="${self.height.sliderMax}"
-                       data-slider-step="1"
-                       data-th-data-slider-value="${self.height.sliderValue}"
-                       data-slider-tooltip="hide"/>
+
+            <div class="tab-pane fade" id="nav-property" role="tabpanel" aria-labelledby="nav-property-tab">
+
+                <select multiple="multiple" class="image-picker show-labels">
+                    <option data-img-src="http://placekitten.com/220/200" value="1">Cute Kitten 1</option>
+                    <option data-img-src="http://placekitten.com/180/200" value="2">Cute Kitten 2</option>
+                    <option data-img-src="http://placekitten.com/130/200" value="3">Cute Kitten 3</option>
+                    <option data-img-src="http://placekitten.com/270/200" value="4">Cute Kitten 4</option>
+                </select>
+
             </div>
         </div>
-
-
-        <div class="tab-pane fade" id="nav-property" role="tabpanel" aria-labelledby="nav-property-tab">
-
-            <select multiple="multiple" class="image-picker show-labels">
-                <option data-img-src="http://placekitten.com/220/200" value="1">Cute Kitten 1</option>
-                <option data-img-src="http://placekitten.com/180/200" value="2">Cute Kitten 2</option>
-                <option data-img-src="http://placekitten.com/130/200" value="3">Cute Kitten 3</option>
-                <option data-img-src="http://placekitten.com/270/200" value="4">Cute Kitten 4</option>
-            </select>
-
-        </div>
-    </div>
+    </form>
 </div>
 
 <div th:replace="layout :: footer"></div>
