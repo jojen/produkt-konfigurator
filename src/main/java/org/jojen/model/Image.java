@@ -21,7 +21,10 @@ public class Image {
     private String extention;
     private String mimetype;
 
-    public MediaType getMediaType() {
+    public MediaType getMediaType(boolean thumb) {
+        if (thumb) {
+            return new MediaType("image", "png");
+        }
         if (getMimetype() != null && getMimetype().contains("/")) {
             return new MediaType(getMimetype().split("/")[0], getMimetype().split("/")[1]);
         }
@@ -35,9 +38,11 @@ public class Image {
     public String getLinkS() {
         return "/media/thumb/" + id + "/s/" + filename + ".png";
     }
+
     public String getLinkM() {
         return "/media/thumb/" + id + "/m/" + filename + ".png";
     }
+
     public String getLinkL() {
         return "/media/thumb/" + id + "/l/" + filename + ".png";
     }

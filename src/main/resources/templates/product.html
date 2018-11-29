@@ -57,31 +57,31 @@
                                    data-slider-tooltip="hide"/>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-2">
                             <h3><span id="length-selectedValue-text"
                                       th:text="${self.length.selectedValue}"></span><span> m</span></h3>
                             <input id="length-selectedValue" type="hidden" th:field="*{length.selectedValue}">
                         </div>
-                        <div class="col-2">
-                            <img class="length-images" style="display:none" th:if="${self.length.xsImage}"
+                        <div class="col-4">
+                            <img width="300" class="length-images" style="display:none" th:if="${self.length.xsImage}"
                                  id="length-image-XS"
-                                 th:src="${self.length.xsImage.linkS}">
-                            <img class="length-images" style="display:none" th:if="${self.length.sImage}"
+                                 th:src="${self.length.xsImage.linkM}">
+                            <img width="300" class="length-images" style="display:none" th:if="${self.length.sImage}"
                                  id="length-image-S"
-                                 th:src="${self.length.sImage.linkS}">
-                            <img class="length-images" th:if="${self.length.mImage}"
+                                 th:src="${self.length.sImage.linkM}">
+                            <img width="300" class="length-images" th:if="${self.length.mImage}"
                                  id="length-image-M"
-                                 th:src="${self.length.mImage.linkS}">
-                            <img class="length-images" style="display:none" th:if="${self.length.lImage}"
+                                 th:src="${self.length.mImage.linkM}">
+                            <img width="300" class="length-images" style="display:none" th:if="${self.length.lImage}"
                                  id="length-image-L"
-                                 th:src="${self.length.lImage.linkS}">
-                            <img class="length-images" style="display:none" th:if="${self.length.xlImage}"
+                                 th:src="${self.length.lImage.linkM}">
+                            <img width="300" class="length-images" style="display:none" th:if="${self.length.xlImage}"
                                  id="length-image-XL"
-                                 th:src="${self.length.xlImage.linkS}">
-                            <img class="length-images" style="display:none" th:if="${self.length.xxlImage}"
+                                 th:src="${self.length.xlImage.linkM}">
+                            <img width="300" class="length-images" style="display:none" th:if="${self.length.xxlImage}"
                                  id="length-image-XXL" th:src="${self.length.xxlImage.linkS}">
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <p class="length-description" style="display:none" id="length-text-XS"
                                th:text="${self.length.xsDescription}"></p>
                             <p class="length-description" style="display:none" id="length-text-S"
@@ -116,31 +116,31 @@
                             <input id="width-selectedValue" type="hidden" th:field="*{width.selectedValue}">
 
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <h3><span id="width-selectedValue-text"
                                       th:text="${self.width.selectedValue}"></span><span> m</span></h3>
                             <input id="width-selectedValue" type="hidden" th:field="*{width.selectedValue}">
                         </div>
-                        <div class="col-2">
-                            <img class="width-images" style="display:none" th:if="${self.width.xsImage}"
+                        <div class="col-4">
+                            <img width="300" class="width-images" style="display:none" th:if="${self.width.xsImage}"
                                  id="width-image-XS"
-                                 th:src="${self.width.xsImage.linkS}">
-                            <img class="width-images" style="display:none" th:if="${self.width.sImage}"
+                                 th:src="${self.width.xsImage.linkM}">
+                            <img width="300" class="width-images" style="display:none" th:if="${self.width.sImage}"
                                  id="width-image-S"
-                                 th:src="${self.width.sImage.linkS}">
-                            <img class="width-images" th:if="${self.width.mImage}"
+                                 th:src="${self.width.sImage.linkM}">
+                            <img width="300" class="width-images" th:if="${self.width.mImage}"
                                  id="width-image-M"
-                                 th:src="${self.width.mImage.linkS}">
-                            <img class="width-images" style="display:none" th:if="${self.width.lImage}"
+                                 th:src="${self.width.mImage.linkM}">
+                            <img width="300" class="width-images" style="display:none" th:if="${self.width.lImage}"
                                  id="width-image-L"
-                                 th:src="${self.width.lImage.linkS}">
-                            <img class="width-images" style="display:none" th:if="${self.width.xlImage}"
+                                 th:src="${self.width.lImage.linkM}">
+                            <img width="300" class="width-images" style="display:none" th:if="${self.width.xlImage}"
                                  id="width-image-XL"
-                                 th:src="${self.width.xlImage.linkS}">
-                            <img class="width-images" style="display:none" th:if="${self.width.xxlImage}"
+                                 th:src="${self.width.xlImage.linkM}">
+                            <img width="300" class="width-images" style="display:none" th:if="${self.width.xxlImage}"
                                  id="width-image-XXL" th:src="${self.width.xxlImage.linkS}">
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <p class="width-description" style="display:none" id="width-text-XS"
                                th:text="${self.width.xsDescription}"></p>
                             <p class="width-description" style="display:none" id="width-text-S"
@@ -174,31 +174,31 @@
                         </div>
 
 
-                        <div class="col-3">
+                        <div class="col-2">
                             <h3><span id="height-selectedValue-text"
                                       th:text="${self.height.selectedValue}"></span><span> m</span></h3>
                             <input id="height-selectedValue" type="hidden" th:field="*{height.selectedValue}">
                         </div>
-                        <div class="col-2">
-                            <img class="height-images" style="display:none" th:if="${self.height.xsImage}"
-                                 id="height-image-XS"
-                                 th:src="${self.height.xsImage.linkS}">
-                            <img class="height-images" style="display:none" th:if="${self.height.sImage}"
-                                 id="height-image-S"
-                                 th:src="${self.height.sImage.linkS}">
-                            <img class="height-images" th:if="${self.height.mImage}"
-                                 id="height-image-M"
-                                 th:src="${self.height.mImage.linkS}">
-                            <img class="height-images" style="display:none" th:if="${self.height.lImage}"
-                                 id="height-image-L"
-                                 th:src="${self.height.lImage.linkS}">
-                            <img class="height-images" style="display:none" th:if="${self.height.xlImage}"
-                                 id="height-image-XL"
-                                 th:src="${self.height.xlImage.linkS}">
-                            <img class="height-images" style="display:none" th:if="${self.height.xxlImage}"
-                                 id="height-image-XXL" th:src="${self.height.xxlImage.linkS}">
-                        </div>
                         <div class="col-4">
+                            <img width="300" class="height-images" style="display:none" th:if="${self.height.xsImage}"
+                                 id="height-image-XS"
+                                 th:src="${self.height.xsImage.linkM}">
+                            <img width="300" class="height-images" style="display:none" th:if="${self.height.sImage}"
+                                 id="height-image-S"
+                                 th:src="${self.height.sImage.linkM}">
+                            <img width="300" class="height-images" th:if="${self.height.mImage}"
+                                 id="height-image-M"
+                                 th:src="${self.height.mImage.linkM}">
+                            <img width="300" class="height-images" style="display:none" th:if="${self.height.lImage}"
+                                 id="height-image-L"
+                                 th:src="${self.height.lImage.linkM}">
+                            <img width="300" class="height-images" style="display:none" th:if="${self.height.xlImage}"
+                                 id="height-image-XL"
+                                 th:src="${self.height.xlImage.linkM}">
+                            <img width="300" class="height-images" style="display:none" th:if="${self.height.xxlImage}"
+                                 id="height-image-XXL" th:src="${self.height.xxlImage.linkM}">
+                        </div>
+                        <div class="col-3">
                             <p class="height-description" style="display:none" id="height-text-XS"
                                th:text="${self.height.xsDescription}"></p>
                             <p class="height-description" style="display:none" id="height-text-S"

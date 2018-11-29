@@ -50,7 +50,7 @@ public class UIMediaController {
             return ResponseEntity.ok()
                     .headers(headers)
                     .contentLength(f.length())
-                    .contentType(image.get().getMediaType())
+                    .contentType(image.get().getMediaType(false))
                     .body(new InputStreamResource(new FileInputStream(f)));
         }
 
@@ -70,7 +70,7 @@ public class UIMediaController {
             return ResponseEntity.ok()
                     .headers(headers)
                     .contentLength(f.length())
-                    .contentType(image.get().getMediaType())
+                    .contentType(image.get().getMediaType(true))
                     .body(new InputStreamResource(new FileInputStream(f)));
         }
 
