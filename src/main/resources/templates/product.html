@@ -8,8 +8,8 @@
 
 <div class="container">
 
-    <form id="productform" class="form-horizontal" method="post" th:object="${self}" action="#"
-          th:action="@{/api/validate/}">
+    <div id="productform" class="form-horizontal" method="post" th:object="${self}" action="#"
+         th:action="@{/api/validate/}">
 
         <input th:field="*{id}" type="hidden"/>
 
@@ -42,52 +42,181 @@
             <div class="tab-pane fade show active" id="nav-size" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div>&nbsp;</div>
                 <div class="card card-body bg-light">
-                    <h4>Länge</h4>
-                    <input th:if="${self.length}" id="length" type="text"
-                           data-provide="slider"
-                           data-th-data-slider-ticks="${self.length.ticks}"
-                           data-th-data-slider-ticks-labels='${self.length.tickLabelsAsString}'
-                           data-slider-min="1"
-                           data-th-data-slider-max="${self.length.sliderMax}"
-                           data-slider-step="1"
-                           data-th-data-slider-value="${self.length.sliderValue}"
-                           data-th-data-slider-values="${self.length.sliderValues}"
-                           data-slider-tooltip="hide"/>
-                    <input id="length-selectedValue" type="hidden" th:field="*{length.selectedValue}">
-                    <img id="length-image">
+                    <div class="row">
+                        <div class="col-3">
+                            <h4>Länge</h4>
+                            <input th:if="${self.length}" id="length" type="text"
+                                   data-provide="slider"
+                                   data-th-data-slider-ticks="${self.length.ticks}"
+                                   data-th-data-slider-ticks-labels='${self.length.tickLabelsAsString}'
+                                   data-slider-min="1"
+                                   data-th-data-slider-max="${self.length.sliderMax}"
+                                   data-slider-step="1"
+                                   data-th-data-slider-value="${self.length.sliderValue}"
+                                   data-th-data-slider-values="${self.length.sliderValues}"
+                                   data-slider-tooltip="hide"/>
+                        </div>
+
+                        <div class="col-3">
+                            <h3><span id="length-selectedValue-text"
+                                      th:text="${self.length.selectedValue}"></span><span> m</span></h3>
+                            <input id="length-selectedValue" type="hidden" th:field="*{length.selectedValue}">
+                        </div>
+                        <div class="col-2">
+                            <img class="length-images" style="display:none" th:if="${self.length.xsImage}"
+                                 id="length-image-XS"
+                                 th:src="${self.length.xsImage.linkS}">
+                            <img class="length-images" style="display:none" th:if="${self.length.sImage}"
+                                 id="length-image-S"
+                                 th:src="${self.length.sImage.linkS}">
+                            <img class="length-images" th:if="${self.length.mImage}"
+                                 id="length-image-M"
+                                 th:src="${self.length.mImage.linkS}">
+                            <img class="length-images" style="display:none" th:if="${self.length.lImage}"
+                                 id="length-image-L"
+                                 th:src="${self.length.lImage.linkS}">
+                            <img class="length-images" style="display:none" th:if="${self.length.xlImage}"
+                                 id="length-image-XL"
+                                 th:src="${self.length.xlImage.linkS}">
+                            <img class="length-images" style="display:none" th:if="${self.length.xxlImage}"
+                                 id="length-image-XXL" th:src="${self.length.xxlImage.linkS}">
+                        </div>
+                        <div class="col-4">
+                            <p class="length-description" style="display:none" id="length-text-XS"
+                               th:text="${self.length.xsDescription}"></p>
+                            <p class="length-description" style="display:none" id="length-text-S"
+                               th:text="${self.length.sDescription}"></p>
+                            <p class="length-description" id="length-text-M"
+                               th:text="${self.length.mDescription}"></p>
+                            <p class="length-description" style="display:none" id="length-text-L"
+                               th:text="${self.length.lDescription}"></p>
+                            <p class="length-description" style="display:none" id="length-text-XL"
+                               th:text="${self.length.xlDescription}"></p>
+                            <p class="length-description" style="display:none" id="length-text-XXL"
+                               th:text="${self.length.xxlDescription}"></p>
+                        </div>
+                    </div>
+
                 </div>
                 <div>&nbsp;</div>
                 <div class="card card-body bg-light">
-                    <h4>Breite</h4>
-                    <input th:if="${self.width}" id="width" type="text"
-                           data-provide="slider"
-                           data-th-data-slider-ticks="${self.width.ticks}"
-                           data-th-data-slider-ticks-labels='${self.width.tickLabelsAsString}'
-                           data-slider-min="1"
-                           data-th-data-slider-max="${self.width.sliderMax}"
-                           data-slider-step="1"
-                           data-th-data-slider-value="${self.width.sliderValue}"
-                           data-th-data-slider-values="${self.width.sliderValues}"
-                           data-slider-tooltip="hide"/>
-                    <input id="width-selectedValue" type="hidden" th:field="*{width.selectedValue}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h4>Breite</h4>
+                            <input th:if="${self.width}" id="width" type="text"
+                                   data-provide="slider"
+                                   data-th-data-slider-ticks="${self.width.ticks}"
+                                   data-th-data-slider-ticks-labels='${self.width.tickLabelsAsString}'
+                                   data-slider-min="1"
+                                   data-th-data-slider-max="${self.width.sliderMax}"
+                                   data-slider-step="1"
+                                   data-th-data-slider-value="${self.width.sliderValue}"
+                                   data-th-data-slider-values="${self.width.sliderValues}"
+                                   data-slider-tooltip="hide"/>
+                            <input id="width-selectedValue" type="hidden" th:field="*{width.selectedValue}">
+
+                        </div>
+                        <div class="col-3">
+                            <h3><span id="width-selectedValue-text"
+                                      th:text="${self.width.selectedValue}"></span><span> m</span></h3>
+                            <input id="width-selectedValue" type="hidden" th:field="*{width.selectedValue}">
+                        </div>
+                        <div class="col-2">
+                            <img class="width-images" style="display:none" th:if="${self.width.xsImage}"
+                                 id="width-image-XS"
+                                 th:src="${self.width.xsImage.linkS}">
+                            <img class="width-images" style="display:none" th:if="${self.width.sImage}"
+                                 id="width-image-S"
+                                 th:src="${self.width.sImage.linkS}">
+                            <img class="width-images" th:if="${self.width.mImage}"
+                                 id="width-image-M"
+                                 th:src="${self.width.mImage.linkS}">
+                            <img class="width-images" style="display:none" th:if="${self.width.lImage}"
+                                 id="width-image-L"
+                                 th:src="${self.width.lImage.linkS}">
+                            <img class="width-images" style="display:none" th:if="${self.width.xlImage}"
+                                 id="width-image-XL"
+                                 th:src="${self.width.xlImage.linkS}">
+                            <img class="width-images" style="display:none" th:if="${self.width.xxlImage}"
+                                 id="width-image-XXL" th:src="${self.width.xxlImage.linkS}">
+                        </div>
+                        <div class="col-4">
+                            <p class="width-description" style="display:none" id="width-text-XS"
+                               th:text="${self.width.xsDescription}"></p>
+                            <p class="width-description" style="display:none" id="width-text-S"
+                               th:text="${self.width.sDescription}"></p>
+                            <p class="width-description" id="width-text-M"
+                               th:text="${self.width.mDescription}"></p>
+                            <p class="width-description" style="display:none" id="width-text-L"
+                               th:text="${self.width.lDescription}"></p>
+                            <p class="width-description" style="display:none" id="width-text-XL"
+                               th:text="${self.width.xlDescription}"></p>
+                            <p class="width-description" style="display:none" id="width-text-XXL"
+                               th:text="${self.width.xxlDescription}"></p>
+                        </div>
+                    </div>
                 </div>
                 <div>&nbsp;</div>
                 <div class="card card-body bg-light">
-                    <h4>Höhe</h4>
-                    <input th:if="${self.height}" id="height" type="text"
-                           data-provide="slider"
-                           data-th-data-slider-ticks="${self.height.ticks}"
-                           data-th-data-slider-ticks-labels='${self.height.tickLabelsAsString}'
-                           data-slider-min="1"
-                           data-th-data-slider-max="${self.height.sliderMax}"
-                           data-slider-step="1"
-                           data-th-data-slider-value="${self.height.sliderValue}"
-                           data-th-data-slider-values="${self.height.sliderValues}"
-                           data-slider-tooltip="hide"/>
-                    <input id="height-selectedValue" type="hidden" th:field="*{height.selectedValue}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h4>Höhe</h4>
+                            <input th:if="${self.height}" id="height" type="text"
+                                   data-provide="slider"
+                                   data-th-data-slider-ticks="${self.height.ticks}"
+                                   data-th-data-slider-ticks-labels='${self.height.tickLabelsAsString}'
+                                   data-slider-min="1"
+                                   data-th-data-slider-max="${self.height.sliderMax}"
+                                   data-slider-step="1"
+                                   data-th-data-slider-value="${self.height.sliderValue}"
+                                   data-th-data-slider-values="${self.height.sliderValues}"
+                                   data-slider-tooltip="hide"/>
+                        </div>
+
+
+                        <div class="col-3">
+                            <h3><span id="height-selectedValue-text"
+                                      th:text="${self.height.selectedValue}"></span><span> m</span></h3>
+                            <input id="height-selectedValue" type="hidden" th:field="*{height.selectedValue}">
+                        </div>
+                        <div class="col-2">
+                            <img class="height-images" style="display:none" th:if="${self.height.xsImage}"
+                                 id="height-image-XS"
+                                 th:src="${self.height.xsImage.linkS}">
+                            <img class="height-images" style="display:none" th:if="${self.height.sImage}"
+                                 id="height-image-S"
+                                 th:src="${self.height.sImage.linkS}">
+                            <img class="height-images" th:if="${self.height.mImage}"
+                                 id="height-image-M"
+                                 th:src="${self.height.mImage.linkS}">
+                            <img class="height-images" style="display:none" th:if="${self.height.lImage}"
+                                 id="height-image-L"
+                                 th:src="${self.height.lImage.linkS}">
+                            <img class="height-images" style="display:none" th:if="${self.height.xlImage}"
+                                 id="height-image-XL"
+                                 th:src="${self.height.xlImage.linkS}">
+                            <img class="height-images" style="display:none" th:if="${self.height.xxlImage}"
+                                 id="height-image-XXL" th:src="${self.height.xxlImage.linkS}">
+                        </div>
+                        <div class="col-4">
+                            <p class="height-description" style="display:none" id="height-text-XS"
+                               th:text="${self.height.xsDescription}"></p>
+                            <p class="height-description" style="display:none" id="height-text-S"
+                               th:text="${self.height.sDescription}"></p>
+                            <p class="height-description" id="height-text-M"
+                               th:text="${self.height.mDescription}"></p>
+                            <p class="height-description" style="display:none" id="height-text-L"
+                               th:text="${self.height.lDescription}"></p>
+                            <p class="height-description" style="display:none" id="height-text-XL"
+                               th:text="${self.height.xlDescription}"></p>
+                            <p class="height-description" style="display:none" id="height-text-XXL"
+                               th:text="${self.height.xxlDescription}"></p>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-
             <div class="tab-pane fade" id="nav-property" role="tabpanel" aria-labelledby="nav-property-tab">
 
                 <select multiple="multiple" class="image-picker show-labels">
@@ -96,9 +225,9 @@
                     <option data-img-src="http://placekitten.com/130/200" value="3">Cute Kitten 3</option>
                     <option data-img-src="http://placekitten.com/270/200" value="4">Cute Kitten 4</option>
                 </select>
-
             </div>
         </div>
+    </div>
     </form>
 </div>
 
